@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4a1be54f-ac1f-4c30-ad1a-ee958dd19479" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/Agent1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/Agent1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AgentsProject/agents/Agent2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AgentsProject/agents/Agent2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AgentsProject/agents/Agent2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AgentsProject/agents/Agent2$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AgentsProject/agents/Agent2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AgentsProject/agents/Agent2.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +33,12 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -47,7 +55,7 @@
     <configuration name="Boot" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="jade.Boot" />
       <module name="AgentsProject" />
-      <option name="PROGRAM_PARAMETERS" value="-gui agent1a:agents.Agent1;agent1b:agents.Agent1;agent2:agents.Agent2" />
+      <option name="PROGRAM_PARAMETERS" value="-gui player1:Player;player2:Player" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -64,7 +72,11 @@
       <option name="presentableId" value="Default" />
       <updated>1572726252822</updated>
       <workItem from="1572726256352" duration="705000" />
-      <workItem from="1572780867362" duration="5589000" />
+      <workItem from="1572780867362" duration="5912000" />
+      <workItem from="1573126196844" duration="2043000" />
+      <workItem from="1573141173506" duration="3752000" />
+      <workItem from="1573222150965" duration="4034000" />
+      <workItem from="1573318859023" duration="1123000" />
     </task>
     <servers />
   </component>
