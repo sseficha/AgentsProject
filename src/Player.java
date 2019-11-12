@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 public class Player extends Agent {
     private ArrayList<DFAgentDescription> teammates;
-    private int positionx;
-    private int positiony;
+    private Coordinate position;
     private int sight;  //optiko pedio
     private Map map;
     protected void setup() {
@@ -19,8 +18,7 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
-        positionx = 0;
-        positiony = 0;
+        // Constructor of Coordinate sets (0, 0)
         sight=2;        //can see 2 boxes away
 
         map = new Map();        //hardcoded path+name for now
@@ -86,6 +84,5 @@ public class Player extends Agent {
                 //move()
             }
         });
-
     }
 }
