@@ -27,7 +27,7 @@ public class Player extends Agent {
         sight=2;        //can see 2 boxes away
         position=new Point(1,1);
 
-        map = new Map();        //hardcoded path+name for now
+//        map = new Map();        //hardcoded path+name for now
 
 
         //add agent to Yellow Pages
@@ -113,12 +113,12 @@ public class Player extends Agent {
 //            System.out.println(surroundings.get(i));
 
 
-//        for (int i=0;i<map.lengthX();i++)
-//            for (int j=0;j<map.lengthY();j++)
-//            {
-//                System.out.print(map.getBox(new Point(i,j)).explored ? 1:0 +"");
-//            }
-//            System.out.println();
+        for (int i=0;i<map.lengthX();i++) {
+            for (int j = 0; j < map.lengthY(); j++) {
+                System.out.print(map.getBox(new Point(i, j)).explored ? 1 : 0 + "");
+            }
+            System.out.println();
+        }
 
 
         return surroundings;
@@ -159,13 +159,13 @@ public class Player extends Agent {
 
             break;
         }
-
         return nextPos;
     }
 
     public void move(Point pos) {
         position.setLocation(pos);
-        System.out.println(position);
+        System.out.println("Position is: ("+pos.x+","+pos.y+")");
+        System.out.println("--------------------------------------------------------------");
 
         if (Objects.equals(map.getBox(position).getContent(), 'X')) {
             System.out.println("Found");

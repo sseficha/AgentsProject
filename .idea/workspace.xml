@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,7 +93,7 @@
       <workItem from="1573222150965" duration="4034000" />
       <workItem from="1573318859023" duration="1982000" />
       <workItem from="1573576596537" duration="2437000" />
-      <workItem from="1573665224121" duration="6585000" />
+      <workItem from="1573665224121" duration="9937000" />
     </task>
     <task id="LOCAL-00001" summary="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
       <created>1573579816206</created>
