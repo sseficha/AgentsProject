@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Map {
+public class Map extends JPanel{
 
     private Box[][] map;
     
