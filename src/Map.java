@@ -29,7 +29,7 @@ public class Map {
     Map(){      //init with text file...path+name hardcoded for now
         BufferedReader r=null;
         try {
-            r = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "/sampleMap.txt")); 
+            r = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "/sampleMap.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
