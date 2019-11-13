@@ -1,3 +1,4 @@
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
@@ -23,6 +24,7 @@ public class Player extends Agent {
 
         // all next are hardcoded for now
         sight=2;        //can see 2 boxes away
+        position=new Point(1,1);
 
         map = new Map();        //hardcoded path+name for now
 
@@ -79,14 +81,47 @@ public class Player extends Agent {
             }
         });
 
-        //Evaluate/Move Behavior
+        //Look/Send/Evaluate/Move Behavior
         addBehaviour(new TickerBehaviour(this,2000) {
             @Override
             protected void onTick() {
+                look();
+                //send?
                 Point nextPos = new Point(evaluate());
                 move(nextPos);
             }
         });
+    }
+
+    public ArrayList<Point> look(){
+        ArrayList<Point> surroundings = new ArrayList<>();
+//        int num=(int)Math.pow(2*sight+1,2);
+        for (int i=-sight;i<=sight;i++)
+        {
+            if (position.x+i<0 || position.x+i>=map.lengthX())
+                continue;
+            for (int j=-sight;j<=sight;j++)
+            {
+                if (position.y+j<0 || position.y+j>=map.lengthY())
+                    continue;
+                surroundings.add(new Point(position.x+i,position.y+j));
+            }
+        }
+        for (int i=0;i<surroundings.size();i++)
+            map.explore(surroundings.get(i).x,surroundings.get(i).y);
+//            System.out.println(surroundings.get(i));
+
+
+//        for (int i=0;i<map.lengthX();i++)
+//            for (int j=0;j<map.lengthY();j++)
+//            {
+//                System.out.print(map.getBox(new Point(i,j)).explored ? 1:0 +"");
+//            }
+//            System.out.println();
+
+
+        return surroundings;
+
     }
 
     private Point evaluate() {
@@ -119,8 +154,6 @@ public class Player extends Agent {
 
             if (nextPos.getY() > map.lengthY()-1)
                 continue;*/
-
-
 
 
             break;

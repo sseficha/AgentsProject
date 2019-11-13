@@ -61,28 +61,29 @@ public class Map {
             for (int j=0;j<tabledMap.get(i).size();j++)
             {
                 map[i][j]=new Box(tabledMap.get(i).get(j));
-                System.out.print(map[i][j].getContent());   //just for debug
+//                System.out.print(map[i][j].getContent());   //just for debug
             }
-            System.out.println();   //just for debug
+//            System.out.println();   //just for debug
         }
-        System.out.println();   //just for debug
+//        System.out.println();   //just for debug
     }
 
     public Box[][] getMap() {
         return map;
     }
 
-    public int lengthX() {
+    public int lengthY() {
         return map.length;
     }
 
-    public int lengthY() {
+    public int lengthX() {
         return map[0].length;
     }
 
     public Box getBox(Point pos) {
-        return map[(int) pos.getX()][(int) pos.getY()];
+        return map[pos.x][pos.y];
     }
+
 
     void explore(int i, int j){
         this.map[i][j].setExplored();
