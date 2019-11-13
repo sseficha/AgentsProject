@@ -1,3 +1,4 @@
+
 import agents.Agent1;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -6,6 +7,8 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
+import jade.core.AID;
+import jade.core.Agent;
 import javax.swing.*;
 
 public class gameLauncher {
@@ -45,7 +48,6 @@ public class gameLauncher {
 
         } catch (StaleProxyException ex) {
         }
-
 
     }
 

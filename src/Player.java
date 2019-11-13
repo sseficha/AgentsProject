@@ -6,12 +6,15 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Agent {
     private ArrayList<DFAgentDescription> teammates;
-    private int positionx;
-    private int positiony;
+    private Point position;
     private int sight;  //optiko pedio
     private Map map;
     protected void setup() {
@@ -19,8 +22,7 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
-        positionx = 0;
-        positiony = 0;
+        position = new Point();
         sight=2;        //can see 2 boxes away
 
         map = new Map();        //hardcoded path+name for now
@@ -82,10 +84,57 @@ public class Player extends Agent {
         addBehaviour(new TickerBehaviour(this,2000) {
             @Override
             protected void onTick() {
-                //evaluate()    kali epitixia Theodosi
-                //move()
+                Point nextPos = new Point(evaluate());
+                move(nextPos);
             }
         });
-
     }
+
+    public Point evaluate() {
+
+        Point nextPos = new Point();
+        ArrayList<Integer> moves = new ArrayList();
+
+        while (true) {
+            Random rand = new Random();
+
+            int posX = rand.nextInt(3) - 1 + (int) position.getX();
+            int posY = rand.nextInt(3) - 1 + (int) position.getY();
+
+            nextPos.setLocation(posX, posY);
+
+            if (nextPos.getX() < 0)
+                continue;
+
+            if (nextPos.getY() < 0)
+                continue;
+
+            if (nextPos.getX() > map.lengthX()-1)
+                continue;
+
+            if (nextPos.getY() > map.lengthY()-1)
+                continue;
+
+            if (Objects.equals(map.getBox(nextPos).getContent(), 'O'))
+                continue;
+
+            if (Objects.equals(map.getBox(nextPos).getContent(), 'X'))
+                System.out.println("Found");
+
+            break;
+        }
+
+        return nextPos;
+    }
+
+    public void move(Point pos) {
+        position.setLocation(pos);
+        System.out.println(position);
+
+        if (Objects.equals(map.getBox(position).getContent(), 'X')) {
+            System.out.println("Found");
+            System.exit(0);
+        }
+    }
+
 }
