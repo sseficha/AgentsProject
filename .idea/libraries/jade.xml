@@ -2,6 +2,7 @@
   <library name="jade">
     <CLASSES>
       <root url="jar://$USER_HOME$/JADE-all-4.4.0/JADE-bin-4.4.0/jade/lib/jade.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jade/lib/jade.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

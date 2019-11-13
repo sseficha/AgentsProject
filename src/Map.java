@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -67,7 +68,23 @@ public class Map {
         System.out.println();   //just for debug
     }
 
-    void explore(int i,int j){
+    public Box[][] getMap() {
+        return map;
+    }
+
+    public int lengthX() {
+        return map.length;
+    }
+
+    public int lengthY() {
+        return map[0].length;
+    }
+
+    public Box getBox(Point pos) {
+        return map[(int) pos.getX()][(int) pos.getY()];
+    }
+
+    void explore(int i, int j){
         this.map[i][j].setExplored();
     }
 

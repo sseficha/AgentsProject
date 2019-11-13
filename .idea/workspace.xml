@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a1be54f-ac1f-4c30-ad1a-ee958dd19479" name="Default Changelist" comment="">
+    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -9,6 +9,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -18,17 +25,27 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="classCoordinate" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1T4jROLVAoODPpYJNoOShSC0vkR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/JADE-all-4.4.0/JADE-bin-4.4.0/jade/lib/jade.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jade/lib/jade.jar!/" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -63,7 +80,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4a1be54f-ac1f-4c30-ad1a-ee958dd19479" name="Default Changelist" comment="" />
+      <changelist id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="" />
       <created>1572726252822</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -76,6 +93,14 @@
       <workItem from="1573318859023" duration="1982000" />
       <workItem from="1573576596537" duration="2437000" />
     </task>
+    <task id="LOCAL-00001" summary="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
+      <created>1573579816206</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573579816206</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -93,5 +118,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)" />
   </component>
 </project>

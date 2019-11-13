@@ -6,12 +6,15 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Agent {
     private ArrayList<DFAgentDescription> teammates;
-    private int positionx;
-    private int positiony;
+    private Point position;
     private int sight;  //optiko pedio
     private Map map;
     protected void setup() {
@@ -19,8 +22,6 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
-        positionx = 0;
-        positiony = 0;
         sight=2;        //can see 2 boxes away
 
         map = new Map();        //hardcoded path+name for now
@@ -82,10 +83,54 @@ public class Player extends Agent {
         addBehaviour(new TickerBehaviour(this,2000) {
             @Override
             protected void onTick() {
-                //evaluate()    kali epitixia Theodosi
-                //move()
+                Point nextPos = new Point(evaluate());
+                move(nextPos);
             }
         });
-
     }
+
+    private Point evaluate() {
+
+        Point nextPos = new Point();
+        ArrayList<Integer> moves = new ArrayList();
+
+        while (true) {
+            Random rand = new Random();
+            int posX = new Random().nextInt(2) - 1 + (int) position.getX();
+            int posY = new Random().nextInt(2) - 1 + (int) position.getY();
+
+            try {
+                nextPos.setLocation(posX, posY);
+
+                if (Objects.equals(map.getBox(nextPos).getContent(), "O"))
+                    continue;
+            } catch (Exception e) {
+            }
+
+
+            /*if (nextPos.getX() < 0)
+                continue;
+
+            if (nextPos.getY() < 0)
+                continue;
+
+            if (nextPos.getX() > map.lengthX()-1)
+                continue;
+
+            if (nextPos.getY() > map.lengthY()-1)
+                continue;*/
+
+
+
+
+            break;
+        }
+
+        return nextPos;
+    }
+
+    private void move(Point pos) {
+        position.setLocation(pos);
+    }
+
 }
