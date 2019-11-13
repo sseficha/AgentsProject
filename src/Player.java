@@ -23,6 +23,7 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
+        position = new Point();
         sight=2;        //can see 2 boxes away
         position=new Point(1,1);
 
@@ -124,26 +125,21 @@ public class Player extends Agent {
 
     }
 
-    private Point evaluate() {
+
+    public Point evaluate() {
 
         Point nextPos = new Point();
         ArrayList<Integer> moves = new ArrayList();
 
         while (true) {
             Random rand = new Random();
-            int posX = new Random().nextInt(2) - 1 + (int) position.getX();
-            int posY = new Random().nextInt(2) - 1 + (int) position.getY();
 
-            try {
-                nextPos.setLocation(posX, posY);
+            int posX = rand.nextInt(3) - 1 + (int) position.getX();
+            int posY = rand.nextInt(3) - 1 + (int) position.getY();
 
-                if (Objects.equals(map.getBox(nextPos).getContent(), "O"))
-                    continue;
-            } catch (Exception e) {
-            }
+            nextPos.setLocation(posX, posY);
 
-
-            /*if (nextPos.getX() < 0)
+            if (nextPos.getX() < 0)
                 continue;
 
             if (nextPos.getY() < 0)
@@ -153,8 +149,13 @@ public class Player extends Agent {
                 continue;
 
             if (nextPos.getY() > map.lengthY()-1)
-                continue;*/
+                continue;
 
+            if (Objects.equals(map.getBox(nextPos).getContent(), 'O'))
+                continue;
+
+            if (Objects.equals(map.getBox(nextPos).getContent(), 'X'))
+                System.out.println("Found");
 
             break;
         }
@@ -162,8 +163,14 @@ public class Player extends Agent {
         return nextPos;
     }
 
-    private void move(Point pos) {
+    public void move(Point pos) {
         position.setLocation(pos);
+        System.out.println(position);
+
+        if (Objects.equals(map.getBox(position).getContent(), 'X')) {
+            System.out.println("Found");
+            System.exit(0);
+        }
     }
 
 }
