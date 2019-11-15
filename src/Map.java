@@ -9,10 +9,17 @@ public class Map extends JPanel{
 
     private Box[][] map;
     
-    public static final Color NONE = new Color(139,69,19);
-    //+public static final Color AGENT = new Color(255,248,220);
-    public static final Color OBSTACLE = new Color(0,0,255);
-    public static final Color TREASURE = new Color(255,0,0);
+    public static final Color NONE = new Color(50,205,50);
+    public static final Color EXPLORED = new Color(240,230,140);
+    //public static final Color AGENT2 = new Color(150,255,0);
+    public static final Color OBSTACLE = new Color(30,144,255);
+    //public static final Color AGENT1 = new Color(255,150,0);
+    
+    
+    private ArrayList<Point> agentPositions;
+    private BufferedImage treasureImage;
+    private BufferedImage agentImage1;
+    private BufferedImage agentImage2;
 
 //    Map(int rows, int cols){        //init only with dimensions
 //        map = new Box[rows][cols];
@@ -27,7 +34,8 @@ public class Map extends JPanel{
 //                map[i][j]=new Box(table[i][j]);
 //    }
 
-    Map(){      //init with text file...path+name hardcoded for now
+    public Map(){      //init with text file...path+name hardcoded for now
+        agentPositions=new ArrayList<>();
         BufferedReader r=null;
         try {
             r = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "/sampleMap.txt"));
@@ -71,6 +79,23 @@ public class Map extends JPanel{
             System.out.println();   //just for debug
         }
         System.out.println();   //just for debug
+        
+        try{
+            treasureImage= ImageIO.read(new File("treasure-chest.png"));
+        }
+        catch (IOException ex)
+        {
+            System.out.println("THERE IS NO SUCH IMAGE treasure!");
+        }
+
+        try{
+            agentImage1= ImageIO.read(new File("red.jpg"));
+            agentImage2= ImageIO.read(new File("green.jpg"));
+        }
+        catch (IOException ex)
+        {
+            System.out.println("THERE IS NO SUCH IMAGE green-red!");
+        }
     }
 
     public Box[][] getMap() {
@@ -89,9 +114,14 @@ public class Map extends JPanel{
         return map[(int) pos.getX()][(int) pos.getY()];
     }
 
-    void explore(int i, int j){
+    public void explore(int i, int j){
         this.map[i][j].setExplored();
     }
+    
+    public void initializeAgentPos(ArrayList<Point> pos){agentPositions=pos;}
+    
+    public void setAgentPositions(int pid, Point x){
+            agentPositions.set(pid,x);}
     
     @Override
     public void paintComponent(Graphics g) {
@@ -109,25 +139,44 @@ public class Map extends JPanel{
             for(int j=0;j<size;j++)
             {
                 Color c;
+                g.setColor(NONE);
+                g.fillRect(i*w,j*h,w,h);
+
                 switch (map[i][j].getContent())
                 {
                     case 'X':
-                        c=TREASURE;
-                        g.setColor(c);
+                        g.drawImage(treasureImage.getScaledInstance(w,h,Image.SCALE_SMOOTH),i*w,j*h,this);
                         break;
-                    /*case "A":
-                        c= AGENT;
-                        g.setColor(c);
-                        break;*/
                     case 'O':
                         c= OBSTACLE;
                         g.setColor(c);
+                        g.fillRect(i*w,j*h,w,h);
                         break;
                     default:
-                        g.setColor(NONE);
                         break;
                 }
-                g.fillRect(i*w,j*h,w,h);
+
+                Point p = new Point(i,j);
+
+                if(map[i][j].getExplored()==true) {
+                    c = EXPLORED;
+                    g.setColor(c);
+                    g.fillRect(i * w, j * h, w, h);
+                }
+
+                if (agentPositions.contains(p)) {
+                    Image temp;
+                    if (agentPositions.indexOf(p) % 2 == 0) {
+                        temp = agentImage1.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+                    } else {
+                        temp = agentImage2.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+                    }
+
+                    g.setColor(g.getColor());
+                    g.fillRect(i * w, j * h, w, h);
+                    g.drawImage(temp, i * w, j * h, this);
+
+                }
 
             }
         g.dispose();
