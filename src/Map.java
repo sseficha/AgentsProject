@@ -1,8 +1,9 @@
+
+import java.awt.image.BufferedImage;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Map extends JPanel{
