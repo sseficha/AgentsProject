@@ -14,6 +14,8 @@ import java.util.Random;
 
 public class Player extends Agent {
     private ArrayList<DFAgentDescription> teammates;
+    private int id;
+    private String team;
     private Point position;
     private int sight;  //optiko pedio
     private Map map;
@@ -22,12 +24,16 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
-        position = new Point();
+        position = new Point(0,0);
         sight=2;        //can see 2 boxes away
 
         map = new Map();        //hardcoded path+name for now
 
 
+        id = Integer.parseInt(getArguments()[1].toString());
+        System.out.println("ID == "+id);
+        team = getArguments()[0].toString();
+        
         //add agent to Yellow Pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -131,8 +137,14 @@ public class Player extends Agent {
         position.setLocation(pos);
         System.out.println(position);
 
+        gameLauncher.map.setAgentPositions(id,pos);
+        gameLauncher.map.explore(pos.x,pos.y);
+        map.explore(pos.x,pos.y);
+        gameLauncher.map.repaint();
+
         if (Objects.equals(map.getBox(position).getContent(), 'X')) {
             System.out.println("Found");
+            JOptionPane.showMessageDialog(null, "The "+ team + " won!", "Winner", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }
