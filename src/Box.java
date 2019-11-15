@@ -2,25 +2,27 @@ public class Box {
     boolean explored;   //explored tha einai kai ayta pou einai endos optikou pediou
     char content;
 
-    Box()
+    public Box()
     {
         content = 'N';
         explored = false;
     }
 
-    Box(char z){
+    public Box(char z){
         content = z;        //z = 'X' || 'O' || 'N'
         explored = false;
     }
 
-    char getContent()
+    public char getContent()
     {
         return content;
     }
 
-    void setExplored()
+    public void setExplored()
     {
         this.explored=true;
     }
+    
+    public boolean getExplored(){return explored;}
 
 }
