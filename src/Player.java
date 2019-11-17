@@ -8,6 +8,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -15,6 +16,8 @@ import java.util.Random;
 
 public class Player extends Agent {
     private ArrayList<DFAgentDescription> teammates;
+    private int id;
+    private String team;
     private Point position;
     private int sight;  //optiko pedio
     private Map map;
@@ -23,13 +26,16 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
+        position = new Point(0,0);
         sight=2;        //can see 2 boxes away
-        position=new Point(1,1);
-
         map = new Map();        //hardcoded path+name for now
         //must be initialized in game launcher and passed as parameter to Player
 
 
+        id = Integer.parseInt(getArguments()[1].toString());
+        System.out.println("ID == "+id);
+        team = getArguments()[0].toString();
+        
         //add agent to Yellow Pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -113,12 +119,12 @@ public class Player extends Agent {
 //            System.out.println(surroundings.get(i));
 
 
-        for (int i=0;i<map.lengthX();i++) {
-            for (int j = 0; j < map.lengthY(); j++) {
-                System.out.print(map.getBox(new Point(i, j)).explored ? 1 : 0 + "");
-            }
-            System.out.println();
-        }
+//        for (int i=0;i<map.lengthX();i++) {
+//            for (int j = 0; j < map.lengthY(); j++) {
+//                System.out.print(map.getBox(new Point(i, j)).explored ? 1 : 0 + "");
+//            }
+//            System.out.println();
+//        }
 
 
         return surroundings;
@@ -167,8 +173,14 @@ public class Player extends Agent {
         System.out.println("Position is: ("+pos.x+","+pos.y+")");
         System.out.println("--------------------------------------------------------------");
 
+        gameLauncher.map.setAgentPositions(id,pos);
+        gameLauncher.map.explore(pos.x,pos.y);
+        map.explore(pos.x,pos.y);
+        gameLauncher.map.repaint();
+
         if (Objects.equals(map.getBox(position).getContent(), 'X')) {
             System.out.println("Found");
+            JOptionPane.showMessageDialog(null, "The "+ team + " won!", "Winner", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }

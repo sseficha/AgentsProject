@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
-      <change afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/green.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/red.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/treasure-chest.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,6 +116,7 @@
       <workItem from="1573318859023" duration="1982000" />
       <workItem from="1573576596537" duration="2437000" />
       <workItem from="1573665224121" duration="11825000" />
+      <workItem from="1574008213702" duration="1719000" />
     </task>
     <task id="LOCAL-00001" summary="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
       <created>1573579816206</created>
