@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
+      <change afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,7 +68,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.gameLauncher">
     <configuration name="Boot" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="jade.Boot" />
       <module name="AgentsProject" />
@@ -75,6 +77,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="gameLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gameLauncher" />
+      <module name="AgentsProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Boot" />
+      <item itemvalue="Application.gameLauncher" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.gameLauncher" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -93,7 +111,7 @@
       <workItem from="1573222150965" duration="4034000" />
       <workItem from="1573318859023" duration="1982000" />
       <workItem from="1573576596537" duration="2437000" />
-      <workItem from="1573665224121" duration="9937000" />
+      <workItem from="1573665224121" duration="11825000" />
     </task>
     <task id="LOCAL-00001" summary="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
       <created>1573579816206</created>

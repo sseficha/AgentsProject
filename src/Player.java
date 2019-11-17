@@ -23,11 +23,11 @@ public class Player extends Agent {
         teammates = new ArrayList<>();
 
         // all next are hardcoded for now
-        position = new Point();
         sight=2;        //can see 2 boxes away
         position=new Point(1,1);
 
-//        map = new Map();        //hardcoded path+name for now
+        map = new Map();        //hardcoded path+name for now
+        //must be initialized in game launcher and passed as parameter to Player
 
 
         //add agent to Yellow Pages

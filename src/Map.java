@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -5,9 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Map {
+public class Map extends JPanel {
 
     private Box[][] map;
+    
+    public static final Color NONE = new Color(139,69,19);
+    //+public static final Color AGENT = new Color(255,248,220);
+    public static final Color OBSTACLE = new Color(0,0,255);
+    public static final Color TREASURE = new Color(255,0,0);
 
 //    Map(int rows, int cols){        //init only with dimensions
 //        map = new Box[rows][cols];
@@ -87,6 +93,46 @@ public class Map {
 
     void explore(int i, int j){
         this.map[i][j].setExplored();
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        int size=map.length;
+        boolean found =false;
+        g.clearRect(0,0,getWidth(),getHeight());
+
+        this.setLayout(new GridLayout(size, size));
+        int w,h;
+        w=getWidth()/size;
+        h=getHeight()/size;
+
+        for(int i=0;i<size;i++)
+            for(int j=0;j<size;j++)
+            {
+                Color c;
+                switch (map[i][j].getContent())
+                {
+                    case 'X':
+                        c=TREASURE;
+                        g.setColor(c);
+                        break;
+                    /*case "A":
+                        c= AGENT;
+                        g.setColor(c);
+                        break;*/
+                    case 'O':
+                        c= OBSTACLE;
+                        g.setColor(c);
+                        break;
+                    default:
+                        g.setColor(NONE);
+                        break;
+                }
+                g.fillRect(i*w,j*h,w,h);
+
+            }
+        g.dispose();
     }
 
 }
