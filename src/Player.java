@@ -78,9 +78,16 @@ public class Player extends Agent {
         addBehaviour(new CyclicBehaviour() {
             @Override
             public void action() {
+                ArrayList<Point> surroundings;
                 ACLMessage msg = myAgent.receive();
                 if (msg != null) {
-                    System.out.println("Message content is: "+msg.getContent());
+                    surroundings=unformat(msg.getContent());
+                    for (int i=0;i<surroundings.size();i++) {
+                        map.explore(surroundings.get(i).x, surroundings.get(i).y);
+                        System.out.print("("+surroundings.get(i).x+","+surroundings.get(i).y+") ");
+                    }
+                    System.out.println("-------------"+myAgent.getName());
+
                 }
                 else {
                     block();
@@ -89,18 +96,19 @@ public class Player extends Agent {
         });
 
         //Look/Send/Evaluate/Move Behavior
-        addBehaviour(new TickerBehaviour(this,2000) {
+        addBehaviour(new TickerBehaviour(this,1500) {
+            String msg;
             @Override
             protected void onTick() {
-                look();
-                //send?
+                msg=look();
+                send(msg);
                 Point nextPos = new Point(evaluate());
                 move(nextPos);
             }
         });
     }
 
-    public ArrayList<Point> look(){
+    public String look(){
         ArrayList<Point> surroundings = new ArrayList<>();
 //        int num=(int)Math.pow(2*sight+1,2);
         for (int i=-sight;i<=sight;i++)
@@ -114,9 +122,10 @@ public class Player extends Agent {
                 surroundings.add(new Point(position.x+i,position.y+j));
             }
         }
-        for (int i=0;i<surroundings.size();i++)
-            map.explore(surroundings.get(i).x,surroundings.get(i).y);
-//            System.out.println(surroundings.get(i));
+        for (int i=0;i<surroundings.size();i++) {
+            map.explore(surroundings.get(i).x, surroundings.get(i).y);
+//            System.out.println("("+surroundings.get(i).x+","+surroundings.get(i).y+") ");
+        }
 
 
 //        for (int i=0;i<map.lengthX();i++) {
@@ -127,8 +136,39 @@ public class Player extends Agent {
 //        }
 
 
-        return surroundings;
+        return format(surroundings);
 
+    }
+
+    public String format(ArrayList<Point> surroundings){
+        StringBuilder msg=new StringBuilder();
+        String x,y;
+        for (int i=0;i<surroundings.size();i++){
+            x=String.valueOf(surroundings.get(i).x);
+            y=String.valueOf(surroundings.get(i).y);
+            msg.append(x+y);
+        }
+        return msg.toString();
+    }
+
+    public ArrayList<Point> unformat(String surroundings) {
+        int x, y;
+        ArrayList<Point> u_surroundings = new ArrayList<>();
+        for (int i = 0; i < surroundings.length(); i += 2) {
+            x = Character.getNumericValue(surroundings.charAt(i));
+            y = Character.getNumericValue(surroundings.charAt(i + 1));
+            u_surroundings.add(new Point(x, y));
+        }
+        return u_surroundings;
+    }
+
+    public void send(String content){
+
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        for(int i=0;i<teammates.size();i++)
+            msg.addReceiver(teammates.get(i).getName());    //+ agent with gui
+        msg.setContent(content);
+        send(msg);
     }
 
 
@@ -170,8 +210,8 @@ public class Player extends Agent {
 
     public void move(Point pos) {
         position.setLocation(pos);
-        System.out.println("Position is: ("+pos.x+","+pos.y+")");
-        System.out.println("--------------------------------------------------------------");
+//        System.out.println("Position is: ("+pos.x+","+pos.y+")");
+//        System.out.println("--------------------------------------------------------------");
 
         gameLauncher.map.setAgentPositions(id,pos);
         gameLauncher.map.explore(pos.x,pos.y);
