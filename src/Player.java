@@ -1,4 +1,3 @@
-import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
@@ -11,10 +10,17 @@ import jade.lang.acl.ACLMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 
 public class Player extends Agent {
+    private static final int EXPLORED_VALUE = 0;
+    private static final int AGENT_VALUE = 0;
+    private static final int NONE_VALUE = 0;
+    private static final int OBJECT_VALUE = 0;
+    private static final int X_VALUE = 0;
+
     private ArrayList<DFAgentDescription> teammates;
     private int id;
     private String team;
@@ -171,8 +177,125 @@ public class Player extends Agent {
         send(msg);
     }
 
+    /**
+     * The distance between the current position and some other.
+     * The function calculates how many steps the agent have to do.
+     * @param pos The second position
+     * @return The distance between the two Points
+     */
+    private int dist(Point pos) {
+
+        int distX = Math.abs(pos.x - position.x);
+        int distY = Math.abs(pos.y - position.y);
+
+        return Math.max(distX, distY);
+    }
+
+    public int evaluateBox(Box box) {
+
+        if (!box.getExplored())
+            return EXPLORED_VALUE;
+
+        /*if (!box.AGENT_VALUE())
+            return AGENT_VALUE;*/
+
+        switch (box.getContent()) {
+
+            case 'N':
+                return NONE_VALUE;
+            case 'O':
+                return OBJECT_VALUE;
+            case 'X':
+                return X_VALUE;
+            default:
+                throw new IllegalStateException("Unexpected value: " + box.getContent());
+        }
+    }
+
+
+    /**
+     * N(x-1, y)
+     * NE(x-1, y+1)
+     * E(x, y+1)
+     * SE(x+1, y+1)
+     * S(x+1, y)
+     * SW(x+1, y-1)
+     * W(x, y-1)
+     * NW(x-1, y-1)
+     *
+     * @return
+     */
+    private HashMap<String, Double> createHash () {
+
+        HashMap<String, Double> direction = new HashMap<>();
+        int last = map.lengthX()-1;
+
+        if (position.x!=0
+                && !Objects.equals(map.getBox(new Point(position.x-1, position.y)).getContent(), 'O'))
+            direction.put("N", 0.0);
+
+        if (position.x!=0 && position.y!=last
+                && !Objects.equals(map.getBox(new Point(position.x-1, position.y-1)).getContent(), 'O'))
+            direction.put("NE", 0.0);
+
+        if (position.y!=last
+                && !Objects.equals(map.getBox(new Point(position.x, position.y+1)).getContent(), 'O'))
+            direction.put("E", 0.0);
+
+        if (position.x!=last && position.y!=last
+                && !Objects.equals(map.getBox(new Point(position.x+1, position.y+1)).getContent(), 'O'))
+            direction.put("SE", 0.0);
+
+        if (position.x!=last
+                && !Objects.equals(map.getBox(new Point(position.x+1, position.y)).getContent(), 'O'))
+            direction.put("S", 0.0);
+
+        if (position.x!=last && position.y!=0
+                && !Objects.equals(map.getBox(new Point(position.x+1, position.y-1)).getContent(), 'O'))
+            direction.put("SW", 0.0);
+
+        if (position.y!=0
+                && !Objects.equals(map.getBox(new Point(position.x, position.y-1)).getContent(), 'O'))
+            direction.put("W", 0.0);
+
+        if (position.x!=0 && position.y!=0
+                && !Objects.equals(map.getBox(new Point(position.x-1, position.y-1)).getContent(), 'O'))
+            direction.put("NW", 0.0);
+
+        return direction;
+    }
 
     public Point evaluate() {
+
+        HashMap<String, Double> direction = createHash();
+
+        for (int i=0; i<map.lengthX(); i++) {
+            for (int j=0; j<map.lengthY(); j++) {
+
+                Point curPoint = new Point(i, j);
+                double distanceFactor = 1 - (double) dist(curPoint) / map.lengthX();
+                double curValue = distanceFactor * evaluateBox(map.getBox(curPoint));
+
+////////////////////////////////// Update score
+
+
+            }
+        }
+
+
+
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+    public Point evaluate1() {
 
         Point nextPos = new Point();
         ArrayList<Integer> moves = new ArrayList();
