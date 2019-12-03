@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Unfinished evaluate - Throw Exception&#10;Update score remaining">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +52,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
@@ -126,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573579816206</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Unfinished evaluate&#10;Update score remaining">
+      <created>1574790164082</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574790164082</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +155,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)" />
+    <MESSAGE value="Unfinished evaluate&#10;Update score remaining" />
+    <MESSAGE value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AgentsProject$gameLauncher.ic" NAME="gameLauncher Coverage Results" MODIFIED="1575391121790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

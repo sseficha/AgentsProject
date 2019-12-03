@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Map extends JPanel {
+public class MyMap extends JPanel {
 
     private Box[][] map;
     
@@ -22,20 +22,20 @@ public class Map extends JPanel {
     private BufferedImage agentImage1;
     private BufferedImage agentImage2;
 
-//    Map(int rows, int cols){        //init only with dimensions
+//    MyMap(int rows, int cols){        //init only with dimensions
 //        map = new Box[rows][cols];
 //        for (int i=0;i<rows;i++)
 //            for (int j=0;j<cols;j++)
 //                map[i][j]=new Box();
 //    }
 //
-//    Map(char[][] table){        //init with sample table
+//    MyMap(char[][] table){        //init with sample table
 //        for (int i=0;i<table.length;i++)
 //            for (int j=0;j<table[i].length;j++)
 //                map[i][j]=new Box(table[i][j]);
 //    }
 
-    public Map(){      //init with text file...path+name hardcoded for now
+    public MyMap(){      //init with text file...path+name hardcoded for now
         agentPositions=new ArrayList<>();
         BufferedReader r=null;
         try {

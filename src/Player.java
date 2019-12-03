@@ -9,10 +9,8 @@ import jade.lang.acl.ACLMessage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
+import java.util.Map;
 
 public class Player extends Agent {
     private static final int EXPLORED_VALUE = 0;
@@ -26,7 +24,7 @@ public class Player extends Agent {
     private String team;
     private Point position;
     private int sight;  //optiko pedio
-    private Map map;
+    private MyMap map;
     protected void setup() {
 
         teammates = new ArrayList<>();
@@ -34,7 +32,7 @@ public class Player extends Agent {
         // all next are hardcoded for now
         position = new Point(0,0);
         sight=2;        //can see 2 boxes away
-        map = new Map();        //hardcoded path+name for now
+        map = new MyMap();        //hardcoded path+name for now
         //must be initialized in game launcher and passed as parameter to Player
 
 
@@ -265,32 +263,101 @@ public class Player extends Agent {
         return direction;
     }
 
+
+
+    private void updateHashScore(HashMap<String, Double> direction, Point curPoint, double curValue) {
+
+        /*if (direction.containsKey("N")
+            && ) {
+            direction.replace("N", direction.get("N")+curValue);
+        }*/
+
+        if (direction.containsKey("NE")
+                && curPoint.x<position.x && curPoint.y>position.y) {
+            direction.replace("NE", direction.get("NE")+curValue);
+        }
+
+        /*if (direction.containsKey("E")
+                && ) {
+            direction.replace("E", direction.get("E")+curValue);
+        }*/
+
+        if (direction.containsKey("SE")
+                && curPoint.x>position.x && curPoint.y>position.y) {
+            direction.replace("SE", direction.get("SE")+curValue);
+        }
+
+        /*if (direction.containsKey("S")
+                && ) {
+            direction.replace("S", direction.get("S")+curValue);
+        }*/
+
+        if (direction.containsKey("SW")
+                && curPoint.x>position.x && curPoint.y<position.y) {
+            direction.replace("SW", direction.get("SW")+curValue);
+        }
+
+        /*if (direction.containsKey("W")
+                && ) {
+            direction.replace("W", direction.get("W")+curValue);
+        }*/
+
+        if (direction.containsKey("NW")
+                && curPoint.x<position.x && curPoint.y<position.y) {
+            direction.replace("NW", direction.get("NW")+curValue);
+        }
+    }
+
+
+    private Point finalPoint(String str) {
+
+        switch (str) {
+            case "N": return new Point(position.x-1, position.y);
+            case "NE": return new Point(position.x-1, position.y+1);
+            case "E": return new Point(position.x, position.y+1);
+            case "SE": return new Point(position.x+1, position.y+1);
+            case "S": return new Point(position.x+1, position.y);
+            case "SW": return new Point(position.x+1, position.y-1);
+            case "W": return new Point(position.x, position.y-1);
+            case "NW": return new Point(position.x-1, position.y-1);
+            default:
+                throw new IllegalStateException("Unexpected value: " + str);
+        }
+    }
+
+
     public Point evaluate() {
 
+        // Initialize hash with every available next position
         HashMap<String, Double> direction = createHash();
 
+        // For each box in map, computes its value and updates the hash
         for (int i=0; i<map.lengthX(); i++) {
             for (int j=0; j<map.lengthY(); j++) {
+
+                if (i==position.x && j==position.y)
+                    continue;
 
                 Point curPoint = new Point(i, j);
                 double distanceFactor = 1 - (double) dist(curPoint) / map.lengthX();
                 double curValue = distanceFactor * evaluateBox(map.getBox(curPoint));
 
-////////////////////////////////// Update score
-
-
+                updateHashScore(direction, curPoint, curValue);
             }
         }
 
+        // If there are many max values, returns randomly
+        double maxValue = Collections.max(direction.values());
+        ArrayList<String> possibleActions = new ArrayList<>();
+        for (Map.Entry entry : direction.entrySet())
+            if ((double) entry.getValue() == maxValue)
+                possibleActions.add((String) entry.getKey());
+
+        int rand = new Random().nextInt(possibleActions.size()-1);
 
 
-
-        return null;
+        return finalPoint(possibleActions.get(rand));
     }
-
-
-
-
 
 
 
@@ -298,7 +365,7 @@ public class Player extends Agent {
     public Point evaluate1() {
 
         Point nextPos = new Point();
-        ArrayList<Integer> moves = new ArrayList();
+        ArrayList<Integer> moves = new ArrayList<>();
 
         while (true) {
             Random rand = new Random();
