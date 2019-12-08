@@ -10,10 +10,7 @@ import sun.awt.windows.ThemeReader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class Player extends Agent {
     private static final int UNEXPLORED_VALUE = 5;
@@ -193,15 +190,44 @@ public class Player extends Agent {
         return Math.max(distX, distY);
     }
 
-    /**
-     * Calculates an estimation for the distance to the target
-     * @return The estimation distance
-     */
     private int estimateDistToTarget (Point pos) {
 
-        int estimateDistance = (dist(pos, new Point(0, 0)) + dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)))/2;
+        int rand = new Random().nextInt(3);
 
-        return estimateDistance;
+        switch (rand) {
+            case 0: return estimateDistToTargetMinValue(pos);
+            case 1: return estimateDistToTargetMeanValue(pos);
+            case 2: return estimateDistToTargetMaxValue(pos);
+            default:
+                throw new IllegalStateException("Unexpected value: " + rand);
+        }
+    }
+
+    /**
+     * Calculates an estimation for the distance to the target (Mean Value)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetMeanValue (Point pos) {
+
+        return (dist(pos, new Point(0, 0)) + dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)))/2;
+    }
+
+    /**
+     * Calculates an estimation for the distance to the target (Min Value)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetMinValue (Point pos) {
+
+        return Integer.min(dist(pos, new Point(0, 0)), dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)));
+    }
+
+    /**
+     * Calculates an estimation for the distance to the target (Max Value)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetMaxValue (Point pos) {
+
+        return Integer.max(dist(pos, new Point(0, 0)), dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)));
     }
 
     /**
@@ -244,7 +270,7 @@ public class Player extends Agent {
 
     /**
      * The main evaluate method that is called after every update of the agents and the map.
-     * It implements a slightly different A* algorithm
+     * It implements a slightly different A* and Best First Algorithm
      * @return The next box that the agent has to go.
      */
     private Point evaluate () {
@@ -277,12 +303,6 @@ public class Player extends Agent {
 
             // Find the min value
             int minIndex = openSetValue.indexOf(Collections.min(openSetValue));
-
-            System.out.println(openSet);
-            System.out.println(openSetDistance);
-            System.out.println(openSetValue);
-            System.out.println(minIndex);
-            System.out.println(closedSet);
 
             // If point exists in closedSet, remove and continue
             if (closedSet.contains(openSet.get(minIndex))) {
@@ -351,191 +371,16 @@ public class Player extends Agent {
             openSetDistance.remove(minIndex);
             openSetNextMove.remove(minIndex);
             openSetValue.remove(minIndex);
-
-            System.out.println("next");
-
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
 
         return closedSet.get(closedSet.size()-1);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Evaluate the box value
-     * @param box The box that is being evaluated
-     * @return The value
+    /**The main evaluate method that is called after every update of the agents and the map.
+     * It implements a random choice for the agent
+     * @return The next box that the agent has to go.
      */
-    private int evaluateBox(Box box) {
-
-        if (!box.getExplored())
-            return UNEXPLORED_VALUE;
-
-        /*if (!box.AGENT_VALUE())
-            return AGENT_VALUE;*/
-
-        switch (box.getContent()) {
-
-            case 'N':
-                return NONE_VALUE;
-            case 'O':
-                return OBJECT_VALUE;
-            case 'X':
-                return X_VALUE;
-            default:
-                throw new IllegalStateException("Unexpected value: " + box.getContent());
-        }
-    }
-
-
-    /**
-     * N(x, y-1)
-     * NE(x+1, y-1)
-     * E(x+1, y)
-     * SE(x+1, y+1)
-     * S(x, y+1)
-     * SW(x-1, y+1)
-     * W(x-1, y)
-     * NW(x-1, y-1)
-     *
-     * Creates an initial hashmap with all the possible moves for the agent before evaluation
-     *
-     * @return The hashmap
-     */
-    private HashMap<String, Double> createHash () {
-
-        HashMap<String, Double> direction = new HashMap<>();
-        int last = map.lengthX()-1;
-
-        System.out.println("Our position: " + position);
-
-        if (position.y!=0
-                && !Objects.equals(map.getBox(new Point(position.x, position.y-1)).getContent(), 'O'))
-            direction.put("N", 0.0);
-
-        if (position.y!=0 && position.x!=last
-                && !Objects.equals(map.getBox(new Point(position.x+1, position.y-1)).getContent(), 'O'))
-            direction.put("NE", 0.0);
-
-        if (position.x!=last
-                && !Objects.equals(map.getBox(new Point(position.x+1, position.y)).getContent(), 'O'))
-            direction.put("E", 0.0);
-
-        if (position.y!=last && position.x!=last
-                && !Objects.equals(map.getBox(new Point(position.x+1, position.y+1)).getContent(), 'O'))
-            direction.put("SE", 0.0);
-
-        if (position.y!=last
-                && !Objects.equals(map.getBox(new Point(position.x, position.y+1)).getContent(), 'O'))
-            direction.put("S", 0.0);
-
-        if (position.y!=last && position.x!=0
-                && !Objects.equals(map.getBox(new Point(position.x-1, position.y+1)).getContent(), 'O'))
-            direction.put("SW", 0.0);
-
-        if (position.x!=0
-                && !Objects.equals(map.getBox(new Point(position.x-1, position.y)).getContent(), 'O'))
-            direction.put("W", 0.0);
-
-        if (position.y!=0 && position.x!=0
-                && !Objects.equals(map.getBox(new Point(position.x-1, position.y-1)).getContent(), 'O'))
-            direction.put("NW", 0.0);
-
-        System.out.println(direction);
-
-        return direction;
-    }
-
-
-    /**
-     * Update the score of the possible moves hashmap, according to the box of the map that was evaluates before.
-     * @param direction The hashmap with the possible moves
-     * @param curPoint The box that was evaluated
-     * @param curValue The evaluation of the box
-     */
-    private void updateHashScore(HashMap<String, Double> direction, Point curPoint, double curValue) {
-
-        Point modified = new Point(position.x - curPoint.x,position.y - curPoint.y);
-
-
-        if (direction.containsKey("N")
-                && modified.y > Math.abs(modified.x)) {
-            direction.replace("N", direction.get("N")+curValue);
-        }
-
-        if (direction.containsKey("NE")
-                && modified.x>0 && modified.y>0) {
-            direction.replace("NE", direction.get("NE")+curValue);
-        }
-
-        if (direction.containsKey("E")
-                && modified.x > Math.abs(modified.y)) {
-            direction.replace("E", direction.get("E")+curValue);
-        }
-
-        if (direction.containsKey("SE")
-                && modified.x>0 && modified.y<0) {
-            direction.replace("SE", direction.get("SE")+curValue);
-        }
-
-        if (direction.containsKey("S")
-                && modified.y < -Math.abs(modified.x)) {
-            direction.replace("S", direction.get("S")+curValue);
-        }
-
-        if (direction.containsKey("SW")
-                && modified.x<0 && modified.y<0) {
-            direction.replace("SW", direction.get("SW")+curValue);
-        }
-
-        if (direction.containsKey("W")
-                && modified.x < -Math.abs(modified.y)) {
-            direction.replace("W", direction.get("W")+curValue);
-        }
-
-        if (direction.containsKey("NW")
-                && modified.x<0 && modified.y>0) {
-            direction.replace("NW", direction.get("NW")+curValue);
-        }
-    }
-
-    /**
-     * Converts the direction string to the next box of the agent.
-     * @param str The direction string
-     * @return The next box that the agent has to go
-     */
-    private Point finalPoint(String str) {
-
-        switch (str) {
-            case "N": return new Point(position.x, position.y-1);
-            case "NE": return new Point(position.x+1, position.y-1);
-            case "E": return new Point(position.x+1, position.y);
-            case "SE": return new Point(position.x+1, position.y+1);
-            case "S": return new Point(position.x, position.y+1);
-            case "SW": return new Point(position.x-1, position.y+1);
-            case "W": return new Point(position.x-1, position.y);
-            case "NW": return new Point(position.x-1, position.y-1);
-            default:
-                throw new IllegalStateException("Unexpected value: " + str);
-        }
-    }
-
-
-    /*public Point evaluate1() {
+    public Point evaluateRandom() {
 
         Point nextPos = new Point();
 
@@ -568,7 +413,7 @@ public class Player extends Agent {
             break;
         }
         return nextPos;
-    }*/
+    }
 
 
     /**

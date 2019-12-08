@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Unfinished evaluate - Throw Exception&#10;Update score remaining">
+    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction (solved but no permanently)&#10;Delete debug messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
@@ -135,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574790164082</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction">
+      <created>1575842206082</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575842206082</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +165,8 @@
     <MESSAGE value="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)" />
     <MESSAGE value="Unfinished evaluate&#10;Update score remaining" />
     <MESSAGE value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
+    <MESSAGE value="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AgentsProject$gameLauncher.ic" NAME="gameLauncher Coverage Results" MODIFIED="1575391121790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
