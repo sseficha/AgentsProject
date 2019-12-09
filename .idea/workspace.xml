@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction (solved but no permanently)&#10;Delete debug messages">
+    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New class Stats&#10;Never called">
+      <change afterPath="$PROJECT_DIR$/src/Stats.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +27,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -57,6 +60,9 @@
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
@@ -166,7 +172,8 @@
     <MESSAGE value="Unfinished evaluate&#10;Update score remaining" />
     <MESSAGE value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
     <MESSAGE value="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction" />
+    <MESSAGE value="New class Stats&#10;Never called" />
+    <option name="LAST_COMMIT_MESSAGE" value="New class Stats&#10;Never called" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AgentsProject$gameLauncher.ic" NAME="gameLauncher Coverage Results" MODIFIED="1575391121790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
