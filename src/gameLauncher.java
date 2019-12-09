@@ -36,6 +36,8 @@ public class gameLauncher {
 
             System.out.println("AGENTS OK");
 
+            Stats stats = new Stats("xrctvybuni");
+
 
             JFrame gameGraphics = new JFrame("TREASURE HUNT!");
             gameGraphics.pack();

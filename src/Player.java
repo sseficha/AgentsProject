@@ -6,18 +6,15 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
-import sun.awt.windows.ThemeReader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Agent {
-    private static final int UNEXPLORED_VALUE = 5;
-    private static final int AGENT_VALUE = -1;
-    private static final int NONE_VALUE = -3;
-    private static final int OBJECT_VALUE = -5;
-    private static final int X_VALUE = 10;
 
     private ArrayList<DFAgentDescription> teammates;
     private int id;
