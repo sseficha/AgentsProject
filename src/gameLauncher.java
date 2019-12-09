@@ -1,4 +1,3 @@
-import agents.Agent1;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 
 public class gameLauncher {
 
-    public static Map map = new Map();
+    public static MyMap map = new MyMap();
     public static ArrayList<Point> agents = new ArrayList<>();
     public static JFrame gameGraphics;
 
