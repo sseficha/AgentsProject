@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New class Stats&#10;Never called">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sampleMap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sampleMap.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +128,7 @@
       <workItem from="1573665224121" duration="11825000" />
       <workItem from="1574008213702" duration="1719000" />
       <workItem from="1574246753176" duration="2726000" />
-      <workItem from="1576016033545" duration="3399000" />
+      <workItem from="1576016033545" duration="3924000" />
     </task>
     <task id="LOCAL-00001" summary="Add getMap, lengthX, lengthY and getBox at class Map&#10;Add an initial evaluate method (random)">
       <created>1573579816206</created>
@@ -194,22 +191,22 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="557" y="288" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/67.27.1299.741@67.27.1299.741" timestamp="1576015449731" />
-    <state width="1253" height="179" key="GridCell.Tab.0.bottom" timestamp="1576019659076">
+    <state width="1253" height="179" key="GridCell.Tab.0.bottom" timestamp="1576019710051">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="179" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1576019659076" />
-    <state width="1253" height="179" key="GridCell.Tab.0.center" timestamp="1576019659075">
+    <state width="1253" height="179" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
+    <state width="1253" height="179" key="GridCell.Tab.0.center" timestamp="1576019710051">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="179" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1576019659075" />
-    <state width="1253" height="179" key="GridCell.Tab.0.left" timestamp="1576019659075">
+    <state width="1253" height="179" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1576019710050" />
+    <state width="1253" height="179" key="GridCell.Tab.0.left" timestamp="1576019710050">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="179" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1576019659075" />
-    <state width="1253" height="179" key="GridCell.Tab.0.right" timestamp="1576019659076">
+    <state width="1253" height="179" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1576019710050" />
+    <state width="1253" height="179" key="GridCell.Tab.0.right" timestamp="1576019710051">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="179" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1576019659076" />
+    <state width="1253" height="179" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
     <state x="372" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1576016032596">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
