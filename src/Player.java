@@ -429,9 +429,29 @@ public class Player extends Agent {
 
         if (Objects.equals(map.getBox(position).getContent(), 'X')) {
             System.out.println("Found");
-            JOptionPane.showMessageDialog(null, "The "+ team + " won!", "Winner", JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
+            //==================????
+            ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+            msg.addReceiver(masterID);
+            String message = "FOUND TREASURE";// ! The team" + team + " won!";
+            msg.setContent(message);
+            send(msg);
+
+
+            //prosorino
+            gameLauncher.killAgents();
+
+            //==================????
+
+            //System.exit(0);
         }
+    }
+    
+     @Override
+    protected void takeDown() {
+        System.out.println("AGENT "
+                + getName()+" IS DOWN NOW!");
+        try { DFService.deregister(this); }
+        catch (Exception e) {}
     }
 
 }
