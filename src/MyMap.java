@@ -144,17 +144,17 @@ public class MyMap extends JPanel {
             {
                 Color c;
                 g.setColor(NONE);
-                g.fillRect(i*w,j*h,w,h);
+                g.fillRect(j*w,i*h,w,h);
 
                 switch (map[i][j].getContent())
                 {
                     case 'X':
-                        g.drawImage(treasureImage.getScaledInstance(w,h,Image.SCALE_SMOOTH),i*w,j*h,this);
+                        g.drawImage(treasureImage.getScaledInstance(w,h,Image.SCALE_SMOOTH),j*w,i*h,this);
                         break;
                     case 'O':
                         c= OBSTACLE;
                         g.setColor(c);
-                        g.fillRect(i*w,j*h,w,h);
+                        g.fillRect(j*w,i*h,w,h);
                         break;
                     default:
                         break;
@@ -165,7 +165,7 @@ public class MyMap extends JPanel {
                 if(map[i][j].getExplored()==true) {
                     c = EXPLORED;
                     g.setColor(c);
-                    g.fillRect(i * w, j * h, w, h);
+                    g.fillRect(j*w, i*h, w, h);
                 }
 
                 if (agentPositions.contains(p)) {
@@ -177,8 +177,8 @@ public class MyMap extends JPanel {
                     }
 
                     g.setColor(g.getColor());
-                    g.fillRect(i * w, j * h, w, h);
-                    g.drawImage(temp, i * w, j * h, this);
+                    g.fillRect(j*w, i*h, w, h);
+                    g.drawImage(temp, j*w, i*h, this);
 
                 }
 
