@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class gameLauncher extends Agent {
 
-    public static Map map;
+    public static MyMap map;
     public ArrayList<Point> agents = new ArrayList<>();
     public JFrame gameGraphics;
     public Runtime runtime = Runtime.instance();
@@ -59,7 +59,7 @@ public class gameLauncher extends Agent {
         ctrl1 = new AgentController[numTeam1];
         ctrl2 = new AgentController[numTeam2];
 
-        map = new Map(numTeam1);
+        map = new MyMap(numTeam1);
 
         int id=0;
 

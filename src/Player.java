@@ -18,7 +18,7 @@ public class Player extends Agent {
 
     private ArrayList<DFAgentDescription> teammates;
     private int id;
-    private String team;
+    public String team;
     private Point position;
     private int sight;  //optiko pedio
     private MyMap map;
@@ -29,9 +29,8 @@ public class Player extends Agent {
         // all next are hardcoded for now
         position = new Point(0,0);
         sight=2;        //can see 2 boxes away
-        map = new MyMap();        //hardcoded path+name for now
+        map = new MyMap(0);        //hardcoded path+name for now
         //must be initialized in game launcher and passed as parameter to Player
-
 
         id = Integer.parseInt(getArguments()[1].toString());
         System.out.println("ID == "+id);
@@ -41,7 +40,7 @@ public class Player extends Agent {
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
-        sd.setType("playing");
+        sd.setType(team);
         sd.setName(getName());
         dfd.addServices(sd);
         try {
@@ -55,7 +54,7 @@ public class Player extends Agent {
         DFAgentDescription[] result = null;
         DFAgentDescription template = new DFAgentDescription();
         sd = new ServiceDescription();
-        sd.setType("playing");
+        sd.setType(team);
         template.addServices(sd);
         try {
             result = DFService.search(this, template);
@@ -69,8 +68,8 @@ public class Player extends Agent {
                 teammates.add(result[i]);
         }
         //test
-//        for (int i=0;i<teammates.size();i++)
-//            System.out.println("Teammate of player "+getName()+" is: "+teammates.get(i).getName());
+        for (int i=0;i<teammates.size();i++)
+            System.out.println("Teammate of player "+getName()+" is: "+teammates.get(i).getName());
 
 
         //add Behaviors
@@ -85,9 +84,9 @@ public class Player extends Agent {
                     surroundings=unformat(msg.getContent());
                     for (int i=0;i<surroundings.size();i++) {
                         map.explore(surroundings.get(i).x, surroundings.get(i).y);
-                        System.out.print("("+surroundings.get(i).x+","+surroundings.get(i).y+") ");
+//                        System.out.print("("+surroundings.get(i).x+","+surroundings.get(i).y+") ");
                     }
-                    System.out.println("-------------"+myAgent.getName());
+//                    System.out.println("-------------"+myAgent.getName());
 
                 }
                 else {
@@ -199,6 +198,7 @@ public class Player extends Agent {
                 throw new IllegalStateException("Unexpected value: " + rand);
         }
     }
+
 
     /**
      * Calculates an estimation for the distance to the target (Mean Value)
@@ -431,7 +431,7 @@ public class Player extends Agent {
             System.out.println("Found");
             //==================????
             ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-            msg.addReceiver(masterID);
+            //msg.addReceiver(masterID);
             String message = "FOUND TREASURE";// ! The team" + team + " won!";
             msg.setContent(message);
             send(msg);
