@@ -80,11 +80,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.gameLauncher">
+  <component name="RunManager" selected="Application.Boot">
     <configuration name="Boot" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="jade.Boot" />
       <module name="AgentsProject" />
-      <option name="PROGRAM_PARAMETERS" value="-gui player1:Player" />
+      <option name="PROGRAM_PARAMETERS" value="-gui master:gameLauncher(3,1)" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
