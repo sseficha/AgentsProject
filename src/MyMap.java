@@ -21,6 +21,7 @@ public class MyMap extends JPanel {
     private BufferedImage treasureImage;
     private BufferedImage agentImage1;
     private BufferedImage agentImage2;
+    private int numteam1pl;
 
 //    MyMap(int rows, int cols){        //init only with dimensions
 //        map = new Box[rows][cols];
@@ -35,7 +36,8 @@ public class MyMap extends JPanel {
 //                map[i][j]=new Box(table[i][j]);
 //    }
 
-    public MyMap(){      //init with text file...path+name hardcoded for now
+    public MyMap(int numteam1pl){      //init with text file...path+name hardcoded for now
+        this.numteam1pl=numteam1pl;
         agentPositions=new ArrayList<>();
         BufferedReader r=null;
         try {
