@@ -7,7 +7,6 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +21,8 @@ public class Player extends Agent {
     private Point position;
     private int sight;  //optiko pedio
     private MyMap map;
+
+
     protected void setup() {
 
         teammates = new ArrayList<>();
@@ -35,7 +36,7 @@ public class Player extends Agent {
         id = Integer.parseInt(getArguments()[1].toString());
         System.out.println("ID == "+id);
         team = getArguments()[0].toString();
-        
+
         //add agent to Yellow Pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -178,7 +179,7 @@ public class Player extends Agent {
      * @param pos2 The second position
      * @return The distance between the two Points
      */
-    private int dist(Point pos1, Point pos2) {
+    private int dist (Point pos1, Point pos2) {
 
         int distX = Math.abs(pos1.x - pos2.x);
         int distY = Math.abs(pos1.y - pos2.y);
@@ -188,44 +189,89 @@ public class Player extends Agent {
 
     private int estimateDistToTarget (Point pos) {
 
-        int rand = new Random().nextInt(3);
+        int playerId = id % teammates.size();
 
-        switch (rand) {
-            case 0: return estimateDistToTargetMinValue(pos);
-            case 1: return estimateDistToTargetMeanValue(pos);
-            case 2: return estimateDistToTargetMaxValue(pos);
+        switch (playerId) {
+            case 0: return estimateDistToTargetNorth(pos);
+            case 1: return estimateDistToTargetEast(pos);
+            case 2: return estimateDistToTargetSouth(pos);
+            case 3: return estimateDistToTargetWest(pos);
+            case 4: return estimateDistToTargetMiddle(pos);
             default:
-                throw new IllegalStateException("Unexpected value: " + rand);
+                throw new IllegalStateException("Unexpected value: " + playerId);
         }
     }
 
+    /**
+     * Calculates an estimation for the distance to the target (Towards North)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetNorth (Point pos) {
+
+        return pos.x;
+    }
+
+    /**
+     * Calculates an estimation for the distance to the target (Towards East)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetEast (Point pos) {
+
+        return Math.abs(pos.y - map.lengthY());
+    }
+
+    /**
+     * Calculates an estimation for the distance to the target (Towards South)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetSouth (Point pos) {
+
+        return pos.y;
+    }
+
+    /**
+     * Calculates an estimation for the distance to the target (Towards West)
+     * @return The estimation distance
+     */
+    private int estimateDistToTargetWest (Point pos) {
+
+        return Math.abs(pos.x - map.lengthY());
+    }
 
     /**
      * Calculates an estimation for the distance to the target (Mean Value)
      * @return The estimation distance
      */
-    private int estimateDistToTargetMeanValue (Point pos) {
+    private int estimateDistToTargetMiddle (Point pos) {
 
-        return (dist(pos, new Point(0, 0)) + dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)))/2;
+        return (dist(pos, new Point(map.lengthX()/2, map.lengthY()/2)));
     }
+
 
     /**
-     * Calculates an estimation for the distance to the target (Min Value)
-     * @return The estimation distance
+     * Returns the index of the set with the minimum value.
+     * If there are multiple solutions, returns randomly one of them.
+     * @param set The ArrayList with the values
+     * @return The index to the minimum value
      */
-    private int estimateDistToTargetMinValue (Point pos) {
+    private int minIndexState (ArrayList<Integer> set) {
 
-        return Integer.min(dist(pos, new Point(0, 0)), dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)));
+        int minInteger = Collections.min(set);
+
+        ArrayList<Integer> minArrayIndexes = new ArrayList<>();
+        for (int i=0; i<set.size(); i++) {
+            if (set.get(i) == minInteger)
+                minArrayIndexes.add(i);
+        }
+
+        /*System.out.println("id " + id);
+        System.out.println(set);
+        System.out.println(minInteger);
+        System.out.println(minArrayIndexes);
+*/
+        return new Random().nextInt(minArrayIndexes.size());
     }
 
-    /**
-     * Calculates an estimation for the distance to the target (Max Value)
-     * @return The estimation distance
-     */
-    private int estimateDistToTargetMaxValue (Point pos) {
-
-        return Integer.max(dist(pos, new Point(0, 0)), dist(pos, new Point(map.lengthX()-1, map.lengthY()-1)));
-    }
 
     /**
      * Check if a given point belongs to the map
@@ -234,7 +280,7 @@ public class Player extends Agent {
      * @param sizeY The size for the second dimension
      * @return True if it can belong, false otherwise
      */
-    private boolean checkPointInMap(Point value, int sizeX, int sizeY) {
+    private boolean pointInMap (Point value, int sizeX, int sizeY) {
         return value.x>=0 && value.y>=0 && value.x<sizeX && value.y<sizeY;
     }
 
@@ -254,8 +300,8 @@ public class Player extends Agent {
                     continue;
                 Point child = new Point(parent.x + i, parent.y + j);
 
-                if (checkPointInMap(child, map.lengthX(), map.lengthY())
-                        && !Objects.equals(map.getBox(child).getContent(), 'O')) {
+                if (pointInMap(child, map.lengthX(), map.lengthY())
+                    && !Objects.equals(map.getBox(child).getContent(), 'O')) {
                     expand.add(child);
                 }
             }
@@ -267,19 +313,32 @@ public class Player extends Agent {
 
     /**
      * The main evaluate method that is called after every update of the agents and the map.
-     * It implements a slightly different A* and Best First Algorithm
+     * Redirects the evaluate method due to team and agent id factors.
      * @return The next box that the agent has to go.
      */
     private Point evaluate () {
 
+        if (Objects.equals(team, "team2"))
+            return evaluateBestFS();
+
+        if (id % teammates.size() == 5)
+            return evaluateRandom();
+
+        return evaluateAStar();
+    }
+
+    /**
+     * It implements a slightly different A* Algorithm and is called from evaluate().
+     * @return The next box that the agent has to go.
+     */
+    private Point evaluateAStar () {
+
         ArrayList<Point> closedSet = new ArrayList<>();
         ArrayList<Point> openSet = new ArrayList<>();
         ArrayList<Point> openSetNextMove = new ArrayList<>();
-        ArrayList<Integer> openSetDistance = new ArrayList<>();
         ArrayList<Integer> openSetValue = new ArrayList<>();
         openSet.add(position);
         openSetNextMove.add(null);
-        openSetDistance.add(0);
         openSetValue.add(0);
 
         // Find if the solution have found
@@ -299,12 +358,11 @@ public class Player extends Agent {
         while (openSet.size()!=0) {
 
             // Find the min value
-            int minIndex = openSetValue.indexOf(Collections.min(openSetValue));
+            int minIndex = minIndexState(openSetValue);
 
             // If point exists in closedSet, remove and continue
             if (closedSet.contains(openSet.get(minIndex))) {
                 openSet.remove(minIndex);
-                openSetDistance.remove(minIndex);
                 openSetNextMove.remove(minIndex);
                 openSetValue.remove(minIndex);
                 continue;
@@ -324,10 +382,9 @@ public class Player extends Agent {
             ArrayList<Point> children = expand(openSet.get(minIndex));
 
             // Check if there are not new moves
-            if (children.size() == 0) {/////////////////////////////////////////////////////
+            if (children.size() == 0) {
                 closedSet.add(openSet.get(minIndex));
                 openSet.remove(minIndex);
-                openSetDistance.remove(minIndex);
                 openSetNextMove.remove(minIndex);
                 openSetValue.remove(minIndex);
 
@@ -335,46 +392,136 @@ public class Player extends Agent {
             }
 
             // Evaluate moves
-            ArrayList<Integer> childrenDistance = new ArrayList<>();
             ArrayList<Integer> childrenValue = new ArrayList<>();
             ArrayList<Point> childrenNextMove = new ArrayList<>();
 
-            for (int i=0; i<children.size(); i++) {
-                childrenDistance.add(dist(position, children.get(i)));
-                int valueToTarget = childrenDistance.get(i);
+            for (Point child : children) {
+                int realDist = dist(position, child);
+                int valueToTarget = realDist;
                 if (solutionFound)
-                    valueToTarget += dist(children.get(i), solution);
+                    valueToTarget += dist(child, solution);
                 else
-                    valueToTarget += estimateDistToTarget(children.get(i));
+                    valueToTarget += estimateDistToTarget(child);
                 childrenValue.add(valueToTarget);
                 Point nextMove = openSetNextMove.get(minIndex);
-                if (childrenDistance.get(i) == 1)
-                    nextMove = children.get(i);
+                if (realDist == 1)
+                    nextMove = child;
                 childrenNextMove.add(nextMove);
             }
 
 
             // Put moves for checking
             openSet.addAll(children);
-            openSetDistance.addAll(childrenDistance);
             openSetNextMove.addAll(childrenNextMove);
             openSetValue.addAll(childrenValue);
-
 
 
             // Put current box to closedSet and remove it from everywhere
             closedSet.add(openSet.get(minIndex));
             openSet.remove(minIndex);
-            openSetDistance.remove(minIndex);
             openSetNextMove.remove(minIndex);
             openSetValue.remove(minIndex);
         }
 
-        return closedSet.get(closedSet.size()-1);
+        return evaluateRandom();
     }
 
-    /**The main evaluate method that is called after every update of the agents and the map.
-     * It implements a random choice for the agent
+    /**
+     * It implements a slightly different Best First Algorithm and is called from evaluate().
+     * @return The next box that the agent has to go.
+     */
+    private Point evaluateBestFS () {
+
+        ArrayList<Point> closedSet = new ArrayList<>();
+        ArrayList<Point> openSet = new ArrayList<>();
+        ArrayList<Point> openSetNextMove = new ArrayList<>();
+        ArrayList<Integer> openSetValue = new ArrayList<>();
+        openSet.add(position);
+        openSetNextMove.add(null);
+        openSetValue.add(0);
+
+        // Find if the solution have found
+        boolean solutionFound = false;
+        Point solution = null;
+        for (int i=0; i<map.lengthX(); i++) {
+            for (int j = 0; j < map.lengthY(); j++) {
+                if (map.getBox(new Point(i, j)).getExplored()
+                    && Objects.equals(map.getBox(new Point(i, j)).getContent(), 'X')) {
+                    solutionFound = true;
+                    solution = new Point(i, j);
+                }
+            }
+        }
+
+
+        while (openSet.size()!=0) {
+
+            // Find the min value
+            int minIndex = minIndexState(openSetValue);
+
+            // If point exists in closedSet, remove and continue
+            if (closedSet.contains(openSet.get(minIndex))) {
+                openSet.remove(minIndex);
+                openSetNextMove.remove(minIndex);
+                openSetValue.remove(minIndex);
+                continue;
+            }
+
+            // If this is the solution, return the next box to move
+            if (solutionFound && openSet.get(minIndex).equals(solution)) {
+                return openSetNextMove.get(minIndex);
+            }
+
+            // If this is an unreached box, return the next box to move
+            if (!map.getBox(openSet.get(minIndex)).getExplored()) {
+                return openSetNextMove.get(minIndex);
+            }
+
+            // Produce possible moves
+            ArrayList<Point> children = expand(openSet.get(minIndex));
+
+            // Check if there are not new moves
+            if (children.size() == 0) {
+                closedSet.add(openSet.get(minIndex));
+                openSet.remove(minIndex);
+                openSetNextMove.remove(minIndex);
+                openSetValue.remove(minIndex);
+
+                continue;
+            }
+
+            // Evaluate moves
+            ArrayList<Integer> childrenValue = new ArrayList<>();
+            ArrayList<Point> childrenNextMove = new ArrayList<>();
+
+            for (Point child : children) {
+                int realDist = dist(position, child);
+                childrenValue.add(realDist);
+                Point nextMove = openSetNextMove.get(minIndex);
+                if (realDist == 1)
+                    nextMove = child;
+                childrenNextMove.add(nextMove);
+            }
+
+
+            // Put moves for checking
+            openSet.addAll(children);
+            openSetNextMove.addAll(childrenNextMove);
+            openSetValue.addAll(childrenValue);
+
+
+            // Put current box to closedSet and remove it from everywhere
+            closedSet.add(openSet.get(minIndex));
+            openSet.remove(minIndex);
+            openSetNextMove.remove(minIndex);
+            openSetValue.remove(minIndex);
+        }
+
+        return evaluateRandom();
+    }
+
+    /**
+     * It implements a random choice for the agent and is called from evaluate().
      * @return The next box that the agent has to go.
      */
     public Point evaluateRandom() {
@@ -389,23 +536,11 @@ public class Player extends Agent {
 
             nextPos.setLocation(posX, posY);
 
-            if (nextPos.getX() < 0)
-                continue;
-
-            if (nextPos.getY() < 0)
-                continue;
-
-            if (nextPos.getX() > map.lengthX()-1)
-                continue;
-
-            if (nextPos.getY() > map.lengthY()-1)
+            if (!pointInMap(nextPos, map.lengthX(), map.lengthY()))
                 continue;
 
             if (Objects.equals(map.getBox(nextPos).getContent(), 'O'))
                 continue;
-
-            if (Objects.equals(map.getBox(nextPos).getContent(), 'X'))
-                System.out.println("Found");
 
             break;
         }
@@ -445,13 +580,14 @@ public class Player extends Agent {
             //System.exit(0);
         }
     }
-    
-     @Override
-    protected void takeDown() {
-        System.out.println("AGENT "
-                + getName()+" IS DOWN NOW!");
-        try { DFService.deregister(this); }
-        catch (Exception e) {}
+
+    @Override
+    protected void takeDown () {
+        System.out.println("AGENT " + getName() + " IS DOWN NOW!");
+        try {
+            DFService.deregister(this);
+        } catch (Exception ignored) {
+        }
     }
 
 }
