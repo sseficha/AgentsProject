@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New class Stats&#10;Never called">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +36,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -54,8 +56,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jade/lib/jade.jar!/" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -70,31 +72,15 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Boot">
+  <component name="RunManager">
     <configuration name="Boot" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="jade.Boot" />
       <module name="AgentsProject" />
-      <option name="PROGRAM_PARAMETERS" value="-gui master:gameLauncher(3,2)" />
+      <option name="PROGRAM_PARAMETERS" value="-gui master:gameLauncher(6,2)" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="gameLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="gameLauncher" />
-      <module name="AgentsProject" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Boot" />
-      <item itemvalue="Application.gameLauncher" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.gameLauncher" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -179,9 +165,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="New class Stats&#10;Never called" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="174" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576019023003">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state x="158" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576241265430">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="158" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576241265430" />
     <state x="174" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1299.741@67.27.1299.741" timestamp="1576019023003" />
     <state x="448" y="182" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1576015891247">
       <screen x="67" y="27" width="1299" height="741" />
@@ -191,26 +178,43 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="557" y="288" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/67.27.1299.741@67.27.1299.741" timestamp="1576015449731" />
-    <state width="1253" height="179" key="GridCell.Tab.0.bottom" timestamp="1576019710051">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1877" height="183" key="GridCell.Tab.0.bottom" timestamp="1576241300141">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="183" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
     <state width="1253" height="179" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
-    <state width="1253" height="179" key="GridCell.Tab.0.center" timestamp="1576019710051">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1877" height="183" key="GridCell.Tab.0.center" timestamp="1576241300141">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="183" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
     <state width="1253" height="179" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1576019710050" />
-    <state width="1253" height="179" key="GridCell.Tab.0.left" timestamp="1576019710050">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1877" height="183" key="GridCell.Tab.0.left" timestamp="1576241300141">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="183" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
     <state width="1253" height="179" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1576019710050" />
-    <state width="1253" height="179" key="GridCell.Tab.0.right" timestamp="1576019710051">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1877" height="183" key="GridCell.Tab.0.right" timestamp="1576241300141">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1877" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
     <state width="1253" height="179" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
-    <state x="372" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1576016032596">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state x="622" y="233" key="RollbackChangesDialog" timestamp="1576234718702">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="622" y="233" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576234718702" />
+    <state x="440" y="97" key="SettingsEditor" timestamp="1576241180708">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="97" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576241180708" />
+    <state x="451" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1576233354738">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="451" y="276" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576233354738" />
     <state x="372" y="224" key="com.intellij.ide.util.TipDialog/67.27.1299.741@67.27.1299.741" timestamp="1576016032596" />
+    <state x="771" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576233686098">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576233686098" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AgentsProject$gameLauncher.ic" NAME="gameLauncher Coverage Results" MODIFIED="1575391121790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
