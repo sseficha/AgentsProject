@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New class Stats&#10;Never called">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jade.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jade.xml" afterDir="false" />
+    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="Class Box ready&#10;Class Stats ready">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575842206082</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Class Box ready&#10;Class Stats ready">
+      <created>1576248195084</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1576248195084</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +170,8 @@
     <MESSAGE value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
     <MESSAGE value="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction" />
     <MESSAGE value="New class Stats&#10;Never called" />
-    <option name="LAST_COMMIT_MESSAGE" value="New class Stats&#10;Never called" />
+    <MESSAGE value="Class Box ready&#10;Class Stats ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Class Box ready&#10;Class Stats ready" />
   </component>
   <component name="WindowStateProjectService">
     <state x="158" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576247728200">
@@ -180,6 +187,10 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="557" y="288" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/67.27.1299.741@67.27.1299.741" timestamp="1576015449731" />
+    <state x="620" y="108" key="CommitChangelistDialog2" timestamp="1576252673013">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="620" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576252673013" />
     <state x="714" y="238" key="DetectedRootsChooserDialog" timestamp="1576247772505">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -188,25 +199,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="666" y="264" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576247794410" />
-    <state width="1877" height="183" key="GridCell.Tab.0.bottom" timestamp="1576241300141">
+    <state width="1877" height="141" key="GridCell.Tab.0.bottom" timestamp="1576252472765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
+    <state width="1877" height="141" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576252472765" />
     <state width="1253" height="179" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
-    <state width="1877" height="183" key="GridCell.Tab.0.center" timestamp="1576241300141">
+    <state width="1877" height="141" key="GridCell.Tab.0.center" timestamp="1576252472765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
+    <state width="1877" height="141" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576252472765" />
     <state width="1253" height="179" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1576019710050" />
-    <state width="1877" height="183" key="GridCell.Tab.0.left" timestamp="1576241300141">
+    <state width="1877" height="141" key="GridCell.Tab.0.left" timestamp="1576252472765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
+    <state width="1877" height="141" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576252472765" />
     <state width="1253" height="179" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1576019710050" />
-    <state width="1877" height="183" key="GridCell.Tab.0.right" timestamp="1576241300141">
+    <state width="1877" height="141" key="GridCell.Tab.0.right" timestamp="1576252472765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576241300141" />
+    <state width="1877" height="141" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576252472765" />
     <state width="1253" height="179" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
     <state x="622" y="233" key="RollbackChangesDialog" timestamp="1576234718702">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -216,6 +227,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="97" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576247799395" />
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2" timestamp="1576248198892">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576248198892" />
     <state x="451" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1576247711118">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
