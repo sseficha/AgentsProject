@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="">
+    <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="New class Stats&#10;Never called">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stats.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,6 +212,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="518" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576244105997" />
+    <state width="600" height="442" key="Diff.GoToChangePopup" timestamp="1576244705233">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="600" height="442" key="Diff.GoToChangePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1576244705233" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1576244725389">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576244725389" />
     <state width="1877" height="183" key="GridCell.Tab.0.bottom" timestamp="1576241574393">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -230,14 +240,18 @@
     </state>
     <state width="1877" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576241574393" />
     <state width="1253" height="179" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
-    <state x="552" y="244" key="Vcs.Push.Dialog.v2" timestamp="1576244109039">
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2" timestamp="1576244442820">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576244109039" />
-    <state x="451" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1576241602786">
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576244442820" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1576244725389">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="451" y="276" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576241602786" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576244725389" />
+    <state x="451" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1576244794868">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="451" y="276" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576244794868" />
     <state x="372" y="224" key="com.intellij.ide.util.TipDialog/67.27.1299.741@67.27.1299.741" timestamp="1576016032596" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576243620067">
       <screen x="0" y="0" width="1920" height="1040" />

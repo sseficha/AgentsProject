@@ -9,7 +9,6 @@ class Stats {
 
     /**
      * The class implements one solution metrics.
-     * <p>
      * It holds information about the number of the agents, the size of the map and the time to find the solution.
      */
     static class Stat {
