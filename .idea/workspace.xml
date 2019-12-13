@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/Agent1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/Agent2.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575842206082</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Code Enhancement&#10;Not ready">
+      <created>1576243955541</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1576243955541</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +184,8 @@
     <MESSAGE value="Unfinished evaluate - Throw Exception&#10;Update score remaining" />
     <MESSAGE value="New evaluate based on A*&#10;Problem with multiagent, all go at the same direction" />
     <MESSAGE value="New class Stats&#10;Never called" />
-    <option name="LAST_COMMIT_MESSAGE" value="New class Stats&#10;Never called" />
+    <MESSAGE value="Code Enhancement&#10;Not ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code Enhancement&#10;Not ready" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="181" key="#Project_Structure" timestamp="1576241639923">
@@ -205,10 +206,10 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="557" y="288" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/67.27.1299.741@67.27.1299.741" timestamp="1576015449731" />
-    <state x="518" y="108" key="CommitChangelistDialog2" timestamp="1576243890107">
+    <state x="518" y="108" key="CommitChangelistDialog2" timestamp="1576243954486">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="518" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576243890107" />
+    <state x="518" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576243954486" />
     <state width="1877" height="183" key="GridCell.Tab.0.bottom" timestamp="1576241574393">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -229,6 +230,10 @@
     </state>
     <state width="1877" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576241574393" />
     <state width="1253" height="179" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1576019710051" />
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2" timestamp="1576243957352">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576243957352" />
     <state x="451" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1576241602786">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
