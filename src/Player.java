@@ -7,7 +7,6 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
