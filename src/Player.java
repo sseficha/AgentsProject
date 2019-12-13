@@ -187,6 +187,10 @@ public class Player extends Agent {
         return Math.max(distX, distY);
     }
 
+    /**
+     * Redirects the estimate distance method due to agent id factors.
+     * @return The estimation distance
+     */
     private int estimateDistToTarget (Point pos) {
 
         int playerId = id % teammates.size();
