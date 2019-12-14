@@ -1,3 +1,4 @@
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
@@ -7,6 +8,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,29 +18,31 @@ import java.util.Random;
 public class Player extends Agent {
 
     private ArrayList<DFAgentDescription> teammates;
-    private int id;
     public String team;
-    private Point position;
+    private int id;
+    private int idInTeam;
     private int sight;  // Range of vision
-    private MyMap map;
-
-    public Player (MyMap map, int sight, Point initPoint) {
-
-        position = initPoint;
-        this.sight = sight;
-        this.map = map;
-
-        // setup();
-    }
+    private Point position;
+    private Box[][] map;
+    private int periodTime;
+    private AID masterId;
 
 
     protected void setup() {
 
         teammates = new ArrayList<>();
-        id = Integer.parseInt(getArguments()[1].toString());
         team = getArguments()[0].toString();
+        id = Integer.parseInt(getArguments()[1].toString());
+        idInTeam = Integer.parseInt(getArguments()[2].toString());
+        sight = Integer.parseInt(getArguments()[3].toString());
+        String[] initPoint = getArguments()[4].toString().split(",");
+        position = new Point(Integer.parseInt(initPoint[0]), Integer.parseInt(initPoint[1]));
+        periodTime = Integer.parseInt(getArguments()[5].toString());
+        this.map = gameLauncher.map.getMap();
+        masterId = null;
 
-        // add agent to Yellow Pages
+
+        // Add agent to Yellow Pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
@@ -52,8 +56,8 @@ public class Player extends Agent {
             fe.printStackTrace();
         }
 
-        //get a list of other agents in yellow pages (teammates)
-        DFAgentDescription[] result = null;
+        // Get a list of other agents in yellow pages (teammates)
+        DFAgentDescription[] result;
         DFAgentDescription template = new DFAgentDescription();
         sd = new ServiceDescription();
         sd.setType(team);
@@ -61,14 +65,19 @@ public class Player extends Agent {
         try {
             result = DFService.search(this, template);
             for (DFAgentDescription dfAgentDescription : result) {
-                if (!dfAgentDescription.getName().equals(this.getName())) ///////////////////////////
+                if (!dfAgentDescription.getName().toString().equals(this.getName()))
                     teammates.add(dfAgentDescription);
             }
         } catch (FIPAException fe) {
             fe.printStackTrace();
         }
 
-        //Communication Behavior (Must update known/unknown map)
+        ACLMessage msg = this.receive();
+        if (msg != null && msg.getContent().equals("GAME STARTED"))
+            masterId = msg.getSender();
+
+
+        // Communication Behavior (Must update known/unknown map)
         addBehaviour(new CyclicBehaviour() {
             @Override
             public void action () {
@@ -77,7 +86,7 @@ public class Player extends Agent {
                 if (msg != null) {
                     surroundings = unformat(msg.getContent());
                     for (Point surrounding : surroundings) {
-                        map.explore(surrounding.x, surrounding.y);
+                        map[surrounding.x][surrounding.y].setExplored();
                     }
                 } else {
                     block();
@@ -85,8 +94,8 @@ public class Player extends Agent {
             }
         });
 
-        //Look/Send/Evaluate/Move Behavior
-        addBehaviour(new TickerBehaviour(this, 1500) {
+        // Look/Send/Evaluate/Move Behavior
+        addBehaviour(new TickerBehaviour(this, periodTime) {
             String msg;
 
             @Override
@@ -103,20 +112,19 @@ public class Player extends Agent {
         ArrayList<Point> surroundings = new ArrayList<>();
 
         for (int i = -sight; i <= sight; i++) {
-            if (position.x + i < 0 || position.x + i >= map.lengthX())
+            if (position.x + i < 0 || position.x + i >= map[0].length)
                 continue;
             for (int j = -sight; j <= sight; j++) {
-                if (position.y + j < 0 || position.y + j >= map.lengthY())
+                if (position.y + j < 0 || position.y + j >= map.length)
                     continue;
                 surroundings.add(new Point(position.x + i, position.y + j));
             }
         }
         for (Point surrounding : surroundings) {
-            map.explore(surrounding.x, surrounding.y);
+            map[surrounding.x][surrounding.y].setExplored();
         }
 
         return format(surroundings);
-
     }
 
     public String format (ArrayList<Point> surroundings) {
@@ -125,19 +133,21 @@ public class Player extends Agent {
         for (Point surrounding : surroundings) {
             x = String.valueOf(surrounding.x);
             y = String.valueOf(surrounding.y);
-            msg.append(x).append(y);
+            msg.append(x).append(',').append(y).append(';');
         }
         return msg.toString();
     }
 
     public ArrayList<Point> unformat (String surroundings) {
-        int x, y;
         ArrayList<Point> u_surroundings = new ArrayList<>();
-        for (int i = 0; i < surroundings.length(); i += 2) {
-            x = Character.getNumericValue(surroundings.charAt(i));
-            y = Character.getNumericValue(surroundings.charAt(i + 1));
-            u_surroundings.add(new Point(x, y));
+        String[] sUnformat = surroundings.split(";");
+
+        for (String s : sUnformat) {
+            String[] temp = s.split(",");
+
+            u_surroundings.add(new Point(Integer.parseInt(temp[0]), Integer.parseInt(temp[1])));
         }
+
         return u_surroundings;
     }
 
@@ -174,7 +184,7 @@ public class Player extends Agent {
      */
     private int estimateDistToTarget (Point pos) {
 
-        int playerId = id % teammates.size();
+        int playerId = idInTeam % teammates.size();
 
         switch (playerId) {
             case 0:
@@ -209,7 +219,7 @@ public class Player extends Agent {
      */
     private int estimateDistToTargetEast (Point pos) {
 
-        return Math.abs(pos.y - map.lengthY());
+        return Math.abs(pos.y - map.length);
     }
 
     /**
@@ -229,7 +239,7 @@ public class Player extends Agent {
      */
     private int estimateDistToTargetWest (Point pos) {
 
-        return Math.abs(pos.x - map.lengthY());
+        return Math.abs(pos.x - map.length);
     }
 
     /**
@@ -239,7 +249,7 @@ public class Player extends Agent {
      */
     private int estimateDistToTargetMiddle (Point pos) {
 
-        return (dist(pos, new Point(map.lengthX() / 2, map.lengthY() / 2)));
+        return (dist(pos, new Point(map[0].length / 2, map.length / 2)));
     }
 
 
@@ -293,8 +303,8 @@ public class Player extends Agent {
                     continue;
                 Point child = new Point(parent.x + i, parent.y + j);
 
-                if (pointInMap(child, map.lengthX(), map.lengthY())
-                    && !Objects.equals(map.getBox(child).getContent(), 'O')) {
+                if (pointInMap(child, map[0].length, map.length)
+                    && !Objects.equals(map[child.x][child.y].getContent(), 'O')) {
                     expand.add(child);
                 }
             }
@@ -315,7 +325,7 @@ public class Player extends Agent {
         if (Objects.equals(team, "team2"))
             return evaluateBestFS();
 
-        if (id % teammates.size() == 5)
+        if (idInTeam % teammates.size() == 5)
             return evaluateRandom();
 
         return evaluateAStar();
@@ -339,10 +349,10 @@ public class Player extends Agent {
         // Find if the solution have found
         boolean solutionFound = false;
         Point solution = null;
-        for (int i = 0; i < map.lengthX(); i++) {
-            for (int j = 0; j < map.lengthY(); j++) {
-                if (map.getBox(new Point(i, j)).getExplored()
-                    && Objects.equals(map.getBox(new Point(i, j)).getContent(), 'X')) {
+        for (int i = 0; i < map[0].length; i++) {
+            for (int j = 0; j < map.length; j++) {
+                if (map[i][j].getExplored()
+                    && Objects.equals(map[i][j].getContent(), 'X')) {
                     solutionFound = true;
                     solution = new Point(i, j);
                 }
@@ -369,7 +379,7 @@ public class Player extends Agent {
             }
 
             // If this is an unreached box, return the next box to move
-            if (!map.getBox(openSet.get(minIndex)).getExplored()) {
+            if (!map[openSet.get(minIndex).x][openSet.get(minIndex).y].getExplored()) {
                 return openSetNextMove.get(minIndex);
             }
 
@@ -439,10 +449,10 @@ public class Player extends Agent {
         // Find if the solution have found
         boolean solutionFound = false;
         Point solution = null;
-        for (int i = 0; i < map.lengthX(); i++) {
-            for (int j = 0; j < map.lengthY(); j++) {
-                if (map.getBox(new Point(i, j)).getExplored()
-                    && Objects.equals(map.getBox(new Point(i, j)).getContent(), 'X')) {
+        for (int i = 0; i < map[0].length; i++) {
+            for (int j = 0; j < map.length; j++) {
+                if (map[i][j].getExplored()
+                    && Objects.equals(map[i][j].getContent(), 'X')) {
                     solutionFound = true;
                     solution = new Point(i, j);
                 }
@@ -469,7 +479,7 @@ public class Player extends Agent {
             }
 
             // If this is an unreached box, return the next box to move
-            if (!map.getBox(openSet.get(minIndex)).getExplored()) {
+            if (!map[openSet.get(minIndex).x][openSet.get(minIndex).y].getExplored()) {
                 return openSetNextMove.get(minIndex);
             }
 
@@ -533,10 +543,10 @@ public class Player extends Agent {
 
             nextPos.setLocation(posX, posY);
 
-            if (!pointInMap(nextPos, map.lengthX(), map.lengthY()))
+            if (!pointInMap(nextPos, map[0].length, map.length))
                 continue;
 
-            if (Objects.equals(map.getBox(nextPos).getContent(), 'O'))
+            if (Objects.equals(map[nextPos.x][nextPos.y].getContent(), 'O'))
                 continue;
 
             break;
@@ -550,26 +560,30 @@ public class Player extends Agent {
      *
      * @param pos The next box that the agent has to go
      */
-    private void move (Point pos) { /////////////////////////////////////////////////////////////
+    private void move (Point pos) {
         position.setLocation(pos);
 
         gameLauncher.map.setAgentPositions(id, pos);
         gameLauncher.map.explore(pos.x, pos.y);
-        map.explore(pos.x, pos.y);
+        map[pos.x][pos.y].setExplored();
         gameLauncher.map.repaint();
 
-        if (Objects.equals(map.getBox(position).getContent(), 'X')) {
+        if (Objects.equals(map[position.x][position.y].getContent(), 'X')) {
             System.out.println("Found");
+            // Inform gameLauncher
             //==================????
             ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-            //msg.addReceiver(masterID);
-            String message = "FOUND TREASURE";// ! The team" + team + " won!";
+            msg.addReceiver(masterId);
+            String message = "FOUND TREASURE ! The " + team + " won!";
             msg.setContent(message);
             send(msg);
 
 
-            //prosorino
+            // Kills all agents and shows message
             gameLauncher.killAgents();
+            JOptionPane.showMessageDialog(null, message, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
+
+
 
             //==================????
         }

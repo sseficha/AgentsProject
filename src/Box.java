@@ -5,8 +5,8 @@ public class Box {
 
     /**
      * Can take the values:
-     * 'X' for Target
-     * 'O' for Object
+     * 'X' for Treasure
+     * 'O' for Obstacle
      * 'N' for None/Path
      */
     private char content;
