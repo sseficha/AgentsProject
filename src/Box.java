@@ -1,28 +1,45 @@
+/**
+ * The class represents the inside of every point in the class MyMap.
+ */
 public class Box {
-    boolean explored;   //explored tha einai kai ayta pou einai endos optikou pediou
-    char content;
 
-    public Box()
-    {
+    /**
+     * Can take the values:
+     * 'X' for Treasure
+     * 'O' for Obstacle
+     * 'N' for None/Path
+     */
+    private char content;
+    private boolean explored;
+
+
+    public Box () {
         content = 'N';
         explored = false;
     }
 
-    public Box(char z){
+    public Box (char z) {
         content = z;        //z = 'X' || 'O' || 'N'
         explored = false;
     }
 
-    public char getContent()
-    {
+    public void setContent (char content) {
+        if (content != 'X' && content != 'O' && content != 'N')
+            throw new IllegalStateException("Unexpected value: " + content); ;
+
+        this.content = content;
+    }
+
+    public char getContent () {
         return content;
     }
 
-    public void setExplored()
-    {
-        this.explored=true;
+    public void setExplored () {
+        this.explored = true;
     }
-    
-    public boolean getExplored(){return explored;}
+
+    public boolean getExplored () {
+        return explored;
+    }
 
 }

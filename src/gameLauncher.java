@@ -18,6 +18,10 @@ import java.util.ArrayList;
 
 public class gameLauncher extends Agent {
 
+    private static final int SIZE = 50;
+    private static final int SIGHT = 2;
+    private static final int TIME = 500;
+
     public static MyMap map;
     public ArrayList<Point> agents = new ArrayList<>();
     public JFrame gameGraphics;
@@ -31,10 +35,11 @@ public class gameLauncher extends Agent {
 
 
     @Override
-    protected void setup() {
+    protected void setup () {
         config.setParameter("gui", "true");
         System.out.println("START");
 
+        // Register gameLauncher
         //====???====
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -52,47 +57,52 @@ public class gameLauncher extends Agent {
         }
         //====???====
 
-        Object[] arguments=getArguments();
+        Object[] arguments = getArguments();
         numTeam1 = Integer.parseInt(arguments[0].toString());
         numTeam2 = Integer.parseInt(arguments[1].toString());
 
         ctrl1 = new AgentController[numTeam1];
         ctrl2 = new AgentController[numTeam2];
 
-        map = new MyMap(numTeam1);
-
-        int id=0;
+        map = new MyMap(numTeam1, SIZE);
 
         try {
-            for(int i=0;i<numTeam1+numTeam2;i++)
-                agents.add(new Point(0,0));
+            for (int i = 0; i < numTeam1 + numTeam2; i++)
+                agents.add(new Point(0, 0));
 
             map.initializeAgentPos(agents);
-            for(int i=0;i<numTeam1;i++){
-                System.out.println("sssss");
-                String[] arg1 = new String[2];
+            for (int i = 0; i < numTeam1; i++) {
+                String[] arg1 = new String[6];
                 arg1[0] = "team1";
-                arg1[1] = Integer.toString(id);
-                id++;
-                ctrl1[i] = mainContainer.createNewAgent("player1-"+ Integer.toString(i), Player.class.getName(),arg1);
+                arg1[1] = Integer.toString(i);
+                arg1[2] = Integer.toString(i);
+                arg1[3] = String.valueOf(SIGHT);
+                arg1[4] = "0,0";
+                arg1[5] = Integer.toString((i + 1) * TIME);
+                ctrl1[i] = mainContainer.createNewAgent("player1-" + i, Player.class.getName(), arg1);
             }
-            for(int i=0;i<numTeam2;i++) {
-                System.out.println("tttt");
-                String[] arg2 = new String[2];
+
+            for (int i = 0; i < numTeam2; i++) {
+                String[] arg2 = new String[6];
                 arg2[0] = "team2";
-                arg2[1] = Integer.toString(id);
-                id++;
-                ctrl2[i] = mainContainer.createNewAgent("player2-"+ Integer.toString(i), Player.class.getName(), arg2);
+                arg2[1] = Integer.toString(i + numTeam1);
+                arg2[2] = Integer.toString(i);
+                arg2[3] = String.valueOf(SIGHT);
+                arg2[4] = "0,0";
+                arg2[5] = Integer.toString((i + 1) * TIME);
+                ctrl2[i] = mainContainer.createNewAgent("player2-" + i, Player.class.getName(), arg2);
             }
             System.out.println("AGENTS OK");
 
-            for(int i=0;i<numTeam1;i++)
+            // Start agents
+            for (int i = 0; i < numTeam1; i++)
                 ctrl1[i].start();
 
-            for(int i=0;i<numTeam2;i++)
+            for (int i = 0; i < numTeam2; i++)
                 ctrl2[i].start();
 
 
+            // Initialize graphics
             gameGraphics = new JFrame("TREASURE HUNT!");
             gameGraphics.setExtendedState(JFrame.MAXIMIZED_BOTH);
             gameGraphics.pack();
@@ -107,43 +117,44 @@ public class gameLauncher extends Agent {
                 e.printStackTrace();
             }
 
-        } catch (StaleProxyException ex) {
+        } catch (StaleProxyException ignored) {
         }
 
-        DFAgentDescription[] result = null;
+
+        // Send to all agents a message that the game has started
+        DFAgentDescription[] result;
         DFAgentDescription template = new DFAgentDescription();
         sd = new ServiceDescription();
         sd.setType("playing");
         template.addServices(sd);
         try {
             result = DFService.search(this, template);
-        }
-        catch (FIPAException fe) {
+
+            ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+            msg.setContent("GAME STARTED");
+            for (DFAgentDescription dfAgentDescription : result) {
+                msg.addReceiver(dfAgentDescription.getName());
+                send(msg);
+            }
+        } catch (FIPAException fe) {
             fe.printStackTrace();
         }
 
 
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent("GAME STARTED");
-        for(int i=0;i<result.length;i++){
-            msg.addReceiver(result[i].getName());
-            send(msg);
-        }
-
+        // If the treasure has been found, stop
         addBehaviour(new CyclicBehaviour() {
             @Override
-            public void action() {
+            public void action () {
                 ACLMessage msg = myAgent.receive();
 
                 if (msg != null) {
                     String s = msg.getContent();
                     System.out.println(s);
-                    if(s.equals("FOUND TREASURE"))
-                    {
-                        JOptionPane.showMessageDialog(gameGraphics, s, "WINNER!",JOptionPane.INFORMATION_MESSAGE);
+                    if (s.equals("FOUND TREASURE")) {
+                        JOptionPane.showMessageDialog(gameGraphics, s, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
                         System.exit(1);
                     }
-                }else {
+                } else {
                     System.out.println("NULL");
                     block();
                 }
@@ -153,19 +164,18 @@ public class gameLauncher extends Agent {
 
 
     //prosorina static
-    public static void killAgents()
-    {
-        for(int i=0;i<ctrl1.length;i++) {
+    public static void killAgents () {
+        for (AgentController agentController : ctrl1) {
             try {
-                ctrl1[i].kill();
+                agentController.kill();
             } catch (StaleProxyException ex) {
                 System.out.println("!!!");
             }
         }
 
-        for(int i=0;i<ctrl2.length;i++) {
+        for (AgentController agentController : ctrl2) {
             try {
-                ctrl2[i].kill();
+                agentController.kill();
             } catch (StaleProxyException ex) {
                 System.out.println("!!!");
             }
@@ -174,12 +184,12 @@ public class gameLauncher extends Agent {
     }
 
     @Override
-    protected void takeDown() {
+    protected void takeDown () {
         try {
             DFService.deregister(this);
             //killAgents();
+        } catch (Exception ignored) {
         }
-        catch (Exception e) {}
     }
-}
 
+}
