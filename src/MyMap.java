@@ -142,47 +142,30 @@ public class MyMap extends JPanel {
         Box[][] map = new Box[s][s];
 
         // Random generate map
-        for (int i = 0; i < s; i++) {
-            for (int j = 0; j < s; j++) {
-                if (new Random().nextBoolean())
-                    map[i][j] = new Box('O');
-                else
-                    map[i][j] = new Box('N');
+        do {
+            for (int i = 0; i < s; i++) {
+                for (int j = 0; j < s; j++) {
+                    if (new Random().nextBoolean())
+                        map[i][j] = new Box('O');
+                    else
+                        map[i][j] = new Box('N');
+                }
             }
-        }
 
-        // Set (0, 0) to 'N' to be able to be starting point
-        map[0][0].setContent('N');
+            // Set (0, 0) to 'N' to be able to be starting point
+            map[0][0].setContent('N');
 
-        // Set destination point
-        int midS = s/2;
-        int posX = new Random().nextInt(midS) + midS;
-        int posY = new Random().nextInt(midS) + midS;
-        map[posY][posX].setContent('X');
+            // Set destination point
+            int midS = s / 2;
+            int posX = new Random().nextInt(midS) + midS;
+            int posY = new Random().nextInt(midS) + midS;
+            map[posY][posX].setContent('X');
 
 
-        // Check if there is a path to destination
-        if (!checkPath(map, new Point(0, 0)))
-            invert(map);
+            // Check if there is a path to destination
+        } while (!checkPath(map, new Point(0, 0)));
 
         return map;
-    }
-
-    private void invert (Box[][] map) {
-
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[0].length; j++) {
-                Point z = new Point(i, j);
-                if (map[z.x][z.y].getContent() == 'O')
-                    map[z.x][z.y].setContent('N');
-                else if (map[z.x][z.y].getContent() == 'N')
-                    map[z.x][z.y].setContent('O');
-
-
-            }
-        }
-
-        map[0][0].setContent('N');
     }
 
     private boolean checkPath (Box[][] mapForCheck, Point position) {

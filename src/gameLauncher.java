@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class gameLauncher extends Agent {
 
-    private static final int SIZE = 20;
+    private static final int SIZE = 50;
     private static final int SIGHT = 2;
     private static final int TIME = 500;
 
@@ -187,7 +187,7 @@ public class gameLauncher extends Agent {
     protected void takeDown () {
         try {
             DFService.deregister(this);
-            killAgents();
+            //killAgents();
         } catch (Exception ignored) {
         }
     }
