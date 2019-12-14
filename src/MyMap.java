@@ -11,11 +11,11 @@ import java.util.Random;
 public class MyMap extends JPanel {
 
     private Box[][] map;
-    
-    public static final Color NONE = new Color(50,205,50);
-    public static final Color EXPLORED = new Color(240,230,140);
-    public static final Color OBSTACLE = new Color(30,144,255);
-    
+
+    public static final Color NONE = new Color(50, 205, 50);
+    public static final Color EXPLORED = new Color(240, 230, 140);
+    public static final Color OBSTACLE = new Color(30, 144, 255);
+
     private ArrayList<Point> agentPositions;
     private BufferedImage treasureImage;
     private BufferedImage agentImage1;
@@ -30,92 +30,86 @@ public class MyMap extends JPanel {
         map = createMap(s);
 
         // Load images
-        try{
+        try {
             treasureImage = ImageIO.read(new File("treasure-chest.png"));
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             System.out.println("THERE IS NO SUCH IMAGE treasure!");
         }
 
-        try{
+        try {
             agentImage1 = ImageIO.read(new File("red.jpg"));
             agentImage2 = ImageIO.read(new File("green.jpg"));
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             System.out.println("THERE IS NO SUCH IMAGE green-red!");
         }
     }
 
-    public Box[][] getMap() {
+    public Box[][] getMap () {
         return map;
     }
 
-    public int lengthX() {
+    public int lengthX () {
         return map[0].length;
     }
 
-    public int lengthY() {
+    public int lengthY () {
         return map.length;
     }
 
-    public Box getBox(Point pos) {
+    public Box getBox (Point pos) {
         return map[pos.x][pos.y];
     }
 
 
-    public void explore(int i, int j){
+    public void explore (int i, int j) {
         this.map[i][j].setExplored();
     }
-    
-    public void initializeAgentPos(ArrayList<Point> pos) {
+
+    public void initializeAgentPos (ArrayList<Point> pos) {
         agentPositions = pos;
     }
-    
-    public void setAgentPositions(int pid, Point x) {
-            agentPositions.set(pid,x);
+
+    public void setAgentPositions (int pid, Point x) {
+        agentPositions.set(pid, x);
     }
-    
+
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent (Graphics g) {
         super.paintComponent(g);
-        int size=map.length;
-        boolean found =false;
-        g.clearRect(0,0,getWidth(),getHeight());
+        int size = map.length;
+        boolean found = false;
+        g.clearRect(0, 0, getWidth(), getHeight());
 
         this.setLayout(new GridLayout(size, size));
-        int w,h;
-        w = getWidth()/size;
-        h = getHeight()/size;
+        int w, h;
+        w = getWidth() / size;
+        h = getHeight() / size;
 
-        for(int i=0; i<size; i++)
-            for(int j=0; j<size; j++)
-            {
+        for (int i = 0; i < size; i++)
+            for (int j = 0; j < size; j++) {
                 Color c;
                 g.setColor(NONE);
-                g.fillRect(j*w,i*h,w,h);
+                g.fillRect(j * w, i * h, w, h);
 
-                switch (map[i][j].getContent())
-                {
+                switch (map[i][j].getContent()) {
                     case 'X':
-                        g.drawImage(treasureImage.getScaledInstance(w,h,Image.SCALE_SMOOTH),j*w,i*h,this);
+                        g.drawImage(treasureImage.getScaledInstance(w, h, Image.SCALE_SMOOTH), j * w, i * h, this);
                         break;
                     case 'O':
-                        c= OBSTACLE;
+                        c = OBSTACLE;
                         g.setColor(c);
-                        g.fillRect(j*w,i*h,w,h);
+                        g.fillRect(j * w, i * h, w, h);
                         break;
                     default:
                         break;
                 }
 
-                Point p = new Point(i,j);
+                Point p = new Point(i, j);
 
-                if(map[i][j].getExplored() && map[i][j].getContent() == 'N') {
+                if (map[i][j].getExplored() && map[i][j].getContent() == 'N') {
                     c = EXPLORED;
                     g.setColor(c);
-                    g.fillRect(j*w, i*h, w, h);
+                    g.fillRect(j * w, i * h, w, h);
                 }
 
                 if (agentPositions.contains(p)) {
@@ -127,8 +121,8 @@ public class MyMap extends JPanel {
                     }
 
                     g.setColor(g.getColor());
-                    g.fillRect(j*w, i*h, w, h);
-                    g.drawImage(temp, j*w, i*h, this);
+                    g.fillRect(j * w, i * h, w, h);
+                    g.drawImage(temp, j * w, i * h, this);
 
                 }
 

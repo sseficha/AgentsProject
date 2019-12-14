@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc9522d-e675-4be8-8b96-2416fb21c10c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameLauncher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -158,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576335825077</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="All ready except statistics">
+      <created>1576336441952</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1576336441952</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +193,8 @@
     <MESSAGE value="Class Box ready&#10;Class Stats ready" />
     <MESSAGE value="Put createMap (not ready)" />
     <MESSAGE value="All ready except createMap when no path found" />
-    <option name="LAST_COMMIT_MESSAGE" value="All ready except createMap when no path found" />
+    <MESSAGE value="All ready except statistics" />
+    <option name="LAST_COMMIT_MESSAGE" value="All ready except statistics" />
   </component>
   <component name="WindowStateProjectService">
     <state x="158" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576335262851">
@@ -202,10 +210,14 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="557" y="288" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/67.27.1299.741@67.27.1299.741" timestamp="1576015449731" />
-    <state x="620" y="108" key="CommitChangelistDialog2" timestamp="1576335824066">
+    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1576336667250">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="620" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576335824066" />
+    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1576336667250" />
+    <state x="620" y="108" key="CommitChangelistDialog2" timestamp="1576336441215">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="620" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576336441215" />
     <state x="714" y="238" key="DetectedRootsChooserDialog" timestamp="1576247772505">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -242,10 +254,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="97" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576328734366" />
-    <state x="552" y="244" key="Vcs.Push.Dialog.v2" timestamp="1576335829161">
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2" timestamp="1576336443508">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576335829161" />
+    <state x="552" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576336443508" />
     <state x="451" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1576328700354">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

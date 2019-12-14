@@ -78,7 +78,7 @@ public class gameLauncher extends Agent {
                 arg1[2] = Integer.toString(i);
                 arg1[3] = String.valueOf(SIGHT);
                 arg1[4] = "0,0";
-                arg1[5] = Integer.toString((i+1)*TIME);
+                arg1[5] = Integer.toString((i + 1) * TIME);
                 ctrl1[i] = mainContainer.createNewAgent("player1-" + i, Player.class.getName(), arg1);
             }
 
@@ -89,7 +89,7 @@ public class gameLauncher extends Agent {
                 arg2[2] = Integer.toString(i);
                 arg2[3] = String.valueOf(SIGHT);
                 arg2[4] = "0,0";
-                arg2[5] = Integer.toString((i+1)*TIME);
+                arg2[5] = Integer.toString((i + 1) * TIME);
                 ctrl2[i] = mainContainer.createNewAgent("player2-" + i, Player.class.getName(), arg2);
             }
             System.out.println("AGENTS OK");

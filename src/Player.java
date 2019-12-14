@@ -28,7 +28,7 @@ public class Player extends Agent {
     private AID masterId;
 
 
-    protected void setup() {
+    protected void setup () {
 
         teammates = new ArrayList<>();
         team = getArguments()[0].toString();
@@ -151,7 +151,7 @@ public class Player extends Agent {
         return u_surroundings;
     }
 
-    public void send(String content){
+    public void send (String content) {
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         for (DFAgentDescription teammate : teammates) {
@@ -582,7 +582,6 @@ public class Player extends Agent {
             // Kills all agents and shows message
             gameLauncher.killAgents();
             JOptionPane.showMessageDialog(null, message, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
-
 
 
             //==================????
