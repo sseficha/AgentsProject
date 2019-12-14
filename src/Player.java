@@ -568,8 +568,9 @@ public class Player extends Agent {
         map[pos.x][pos.y].setExplored();
         gameLauncher.map.repaint();
 
+        // If the treasure has been found, stop
         if (Objects.equals(map[position.x][position.y].getContent(), 'X')) {
-            System.out.println("Found");
+
             // Inform gameLauncher
             //==================????
             ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
@@ -578,12 +579,9 @@ public class Player extends Agent {
             msg.setContent(message);
             send(msg);
 
-
             // Kills all agents and shows message
             gameLauncher.killAgents();
             JOptionPane.showMessageDialog(null, message, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
-
-
             //==================????
         }
     }

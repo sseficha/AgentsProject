@@ -49,9 +49,8 @@ public class gameLauncher extends Agent {
         dfd.addServices(sd);
         try {
             DFService.register(this, dfd);
-            System.out.println("register ok");
-        } catch (
-                FIPAException fe) {
+            //System.out.println("register ok");
+        } catch (FIPAException fe) {
             System.out.println("register not ok");
             fe.printStackTrace();
         }
@@ -92,7 +91,6 @@ public class gameLauncher extends Agent {
                 arg2[5] = Integer.toString((i + 1) * TIME);
                 ctrl2[i] = mainContainer.createNewAgent("player2-" + i, Player.class.getName(), arg2);
             }
-            System.out.println("AGENTS OK");
 
             // Start agents
             for (int i = 0; i < numTeam1; i++)
@@ -112,7 +110,7 @@ public class gameLauncher extends Agent {
             gameGraphics.setVisible(true);
 
             try {
-                Thread.sleep(3000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -169,7 +167,7 @@ public class gameLauncher extends Agent {
             try {
                 agentController.kill();
             } catch (StaleProxyException ex) {
-                System.out.println("!!!");
+                System.out.println("Something wrong when killing the agent!!!");
             }
         }
 
@@ -177,7 +175,7 @@ public class gameLauncher extends Agent {
             try {
                 agentController.kill();
             } catch (StaleProxyException ex) {
-                System.out.println("!!!");
+                System.out.println("Something wrong when killing the agent!!!");
             }
         }
 
