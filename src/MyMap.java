@@ -16,18 +16,27 @@ public class MyMap extends JPanel {
     public static final Color EXPLORED = new Color(240, 230, 140);
     public static final Color OBSTACLE = new Color(30, 144, 255);
 
+    private static final int DEFAULTPERCENTAGEOFOBSTACLES = 25;
+
     private ArrayList<Point> agentPositions;
     private BufferedImage treasureImage;
     private BufferedImage agentImage1;
     private BufferedImage agentImage2;
-    private int numteam1pl;
+    private int numTeam1Players;
 
+    public MyMap (int numTeam1Players, int s) {
+        constructor(numTeam1Players, s, DEFAULTPERCENTAGEOFOBSTACLES);
+    }
 
-    public MyMap (int numteam1pl, int s) {//init with text file...path+name hardcoded for now
+    public MyMap (int numTeam1Players, int s, int percentageOfObstacles) {
+        constructor(numTeam1Players, s, percentageOfObstacles);
+    }
 
-        this.numteam1pl = numteam1pl;
+    private void constructor (int numTeam1Players, int s, int percentageOfObstacles) {
+
+        this.numTeam1Players = numTeam1Players;
         agentPositions = new ArrayList<>();
-        map = createMap(s);
+        map = createMap(s, percentageOfObstacles);
 
         // Load images
         try {
@@ -114,7 +123,7 @@ public class MyMap extends JPanel {
 
                 if (agentPositions.contains(p)) {
                     Image temp;
-                    if (agentPositions.indexOf(p) < numteam1pl) {
+                    if (agentPositions.indexOf(p) < numTeam1Players) {
                         temp = agentImage1.getScaledInstance(w, h, Image.SCALE_SMOOTH);
                     } else {
                         temp = agentImage2.getScaledInstance(w, h, Image.SCALE_SMOOTH);
@@ -131,7 +140,7 @@ public class MyMap extends JPanel {
     }
 
 
-    private Box[][] createMap (int s) {
+    private Box[][] createMap (int s, int percentageOfObstacles) {
 
         Box[][] map = new Box[s][s];
 
@@ -139,7 +148,7 @@ public class MyMap extends JPanel {
         do {
             for (int i = 0; i < s; i++) {
                 for (int j = 0; j < s; j++) {
-                    if (new Random().nextBoolean())
+                    if (new Random().nextInt(100) < percentageOfObstacles)
                         map[i][j] = new Box('O');
                     else
                         map[i][j] = new Box('N');
@@ -157,6 +166,7 @@ public class MyMap extends JPanel {
 
 
             // Check if there is a path to destination
+            System.out.println("Check");
         } while (!checkPath(map, new Point(0, 0)));
 
         return map;
