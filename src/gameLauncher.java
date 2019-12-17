@@ -19,8 +19,9 @@ import java.util.ArrayList;
 public class gameLauncher extends Agent {
 
     private static final int SIZE = 50;
-    private static final int SIGHT = 2;
+    private static final int SIGHT = 3;
     private static final int TIME = 500;
+    private static final int DEFAULTPERCENTAGEOFOBSTACLES = 30;
 
     public static MyMap map;
     public ArrayList<Point> agents = new ArrayList<>();
@@ -63,7 +64,7 @@ public class gameLauncher extends Agent {
         ctrl1 = new AgentController[numTeam1];
         ctrl2 = new AgentController[numTeam2];
 
-        map = new MyMap(numTeam1, SIZE);
+        map = new MyMap(numTeam1, SIZE, DEFAULTPERCENTAGEOFOBSTACLES);
 
         try {
             for (int i = 0; i < numTeam1 + numTeam2; i++)
@@ -147,13 +148,11 @@ public class gameLauncher extends Agent {
 
                 if (msg != null) {
                     String s = msg.getContent();
-                    System.out.println(s);
                     if (s.equals("FOUND TREASURE")) {
                         JOptionPane.showMessageDialog(gameGraphics, s, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
                         System.exit(1);
                     }
                 } else {
-                    System.out.println("NULL");
                     block();
                 }
             }
