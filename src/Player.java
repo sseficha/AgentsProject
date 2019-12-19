@@ -579,6 +579,11 @@ public class Player extends Agent {
             msg.setContent(message);
             send(msg);
 
+            String algorithm = "BestFS";
+            if (team.equals("team2"))
+                algorithm = "A*";
+            gameLauncher.stats.putStat(teammates.size(), algorithm, new Point(map[0].length, map.length), System.nanoTime(), gameLauncher.TIME);
+
             // Kills all agents and shows message
             gameLauncher.killAgents();
             JOptionPane.showMessageDialog(null, message, "WINNER!", JOptionPane.INFORMATION_MESSAGE);

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 class Stats {
 
-    private String filename;
     private ArrayList<Stat> stats;
+    private String filename;
+    private double startTime;
 
     /**
      * The class implements one solution metrics.
@@ -16,9 +17,9 @@ class Stats {
         private int numberOfAgents;
         private String algorithm;
         private Point sizeOfMap;
-        private int time;
+        private double time;
 
-        Stat (int numberOfAgents, String algorithm, Point sizeOfMap, int time) {
+        Stat (int numberOfAgents, String algorithm, Point sizeOfMap, double time) {
             this.numberOfAgents = numberOfAgents;
             this.algorithm = algorithm;
             this.sizeOfMap = sizeOfMap;
@@ -64,14 +65,15 @@ class Stats {
                 String algorithm = data[1];
                 int sizeOfMapX = Integer.parseInt(data[2]);
                 int sizeOfMapY = Integer.parseInt(data[3]);
-                int time = Integer.parseInt(data[4]);
+                double time = Double.parseDouble(data[4]);
 
                 stats.add(new Stat(numberOfAgents, algorithm, new Point(sizeOfMapX, sizeOfMapY), time));
             }
 
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
+        } catch (IOException ignored) {
         }
+
+        startTime = System.nanoTime();
     }
 
 
@@ -80,11 +82,13 @@ class Stats {
      *
      * @param numberOfAgents The number of agents used
      * @param sizeOfMap      The size of the map used
-     * @param time           The time consumed till solution be found
+     * @param nanoTime       The current time after the solution has found
      */
-    private void putStat (int numberOfAgents, String algorithm, Point sizeOfMap, int time) {
+    public void putStat (int numberOfAgents, String algorithm, Point sizeOfMap, long nanoTime, int ticker) {
 
-        stats.add(new Stat(numberOfAgents, algorithm, sizeOfMap, time));
+        double timeElapsed = ((nanoTime - startTime) / (ticker * Math.pow(10, 9)));
+
+        stats.add(new Stat(numberOfAgents, algorithm, sizeOfMap, timeElapsed));
 
     }
 
@@ -92,12 +96,12 @@ class Stats {
     /**
      * Saves the ArrayList with the stats at the file that class holds.
      */
-    private void save () {
+    public void save () {
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(filename))) {
             stats.forEach((i) -> {
                 try {
-                    out.write(i.toString() + "/n");
+                    out.write(i.toString() + System.lineSeparator());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -117,7 +121,7 @@ class Stats {
      *
      * @return An ArrayList with all the mean values at every situation
      */
-    private ArrayList<Stat> calculateStats () {
+    public ArrayList<Stat> calculateStats () {
 
         ArrayList<Stat> metrics = new ArrayList<>();
         ArrayList<Integer> metricsCount = new ArrayList<>();
