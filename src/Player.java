@@ -184,7 +184,7 @@ public class Player extends Agent {
      */
     private int estimateDistToTarget (Point pos) {
 
-        int playerId = idInTeam % teammates.size();
+        int playerId = idInTeam % 6;
 
         switch (playerId) {
             case 0:
@@ -325,7 +325,7 @@ public class Player extends Agent {
         if (Objects.equals(team, "team2"))
             return evaluateBestFS();
 
-        if (idInTeam % teammates.size() == 5)
+        if (idInTeam % 6 == 5)
             return evaluateRandom();
 
         return evaluateAStar();
@@ -579,6 +579,11 @@ public class Player extends Agent {
             msg.setContent(message);
             send(msg);
 
+            String algorithm = "BestFS";
+            if (team.equals("team1"))
+                algorithm = "A*";
+            gameLauncher.stats.putStat(teammates.size(), algorithm, sight, new Point(map[0].length, map.length), System.nanoTime(), gameLauncher.TIME);
+
             // Kills all agents and shows message
             gameLauncher.killAgents();
             JOptionPane.showMessageDialog(null, message, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
@@ -588,7 +593,7 @@ public class Player extends Agent {
 
     @Override
     protected void takeDown () {
-        System.out.println("AGENT " + getName() + " IS DOWN NOW!");
+
         try {
             DFService.deregister(this);
         } catch (Exception ignored) {

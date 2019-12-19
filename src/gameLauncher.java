@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class gameLauncher extends Agent {
 
-    private static final int SIZE = 50;
-    private static final int SIGHT = 3;
-    private static final int TIME = 500;
-    private static final int DEFAULTPERCENTAGEOFOBSTACLES = 30;
+    public static final int SIZE = 50;
+    public static final int SIGHT = 5;
+    public static final int TIME = 10;
+    public static final int DEFAULTPERCENTAGEOFOBSTACLES = 30;
 
     public static MyMap map;
     public ArrayList<Point> agents = new ArrayList<>();
@@ -33,6 +33,7 @@ public class gameLauncher extends Agent {
     public int numTeam2;
     public static AgentController[] ctrl1; //prosorina static
     public static AgentController[] ctrl2; //prosorina static
+    public static Stats stats;
 
 
     @Override
@@ -100,6 +101,8 @@ public class gameLauncher extends Agent {
             for (int i = 0; i < numTeam2; i++)
                 ctrl2[i].start();
 
+            stats = new Stats("output.txt");
+
 
             // Initialize graphics
             gameGraphics = new JFrame("TREASURE HUNT!");
@@ -162,6 +165,10 @@ public class gameLauncher extends Agent {
 
     //prosorina static
     public static void killAgents () {
+
+        stats.save();
+        System.out.println(stats.calculateStats());
+
         for (AgentController agentController : ctrl1) {
             try {
                 agentController.kill();
