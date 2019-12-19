@@ -166,7 +166,6 @@ public class MyMap extends JPanel {
 
 
             // Check if there is a path to destination
-            System.out.println("Check");
         } while (!checkPath(map, new Point(0, 0)));
 
         return map;

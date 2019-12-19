@@ -593,7 +593,7 @@ public class Player extends Agent {
 
     @Override
     protected void takeDown () {
-        System.out.println("AGENT " + getName() + " IS DOWN NOW!");
+
         try {
             DFService.deregister(this);
         } catch (Exception ignored) {

@@ -46,7 +46,7 @@ class Stats {
         @Override
         public String toString () {
 
-            return "Agents: " + numberOfAgents + ", Algorithm: " + algorithm + ", Sight: " + sight + ", Size: " + sizeOfMap.x + "*" + sizeOfMap.y + ", Time: " + time + System.lineSeparator();
+            return "Agents: " + numberOfAgents + ", Algorithm: " + algorithm + ", Sight: " + sight + ", Size: " + sizeOfMap.x + "*" + sizeOfMap.y + ", Time: " + time + " seconds." + System.lineSeparator();
         }
 
     }

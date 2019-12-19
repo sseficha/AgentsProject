@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class gameLauncher extends Agent {
 
-    public static final int SIZE = 100;
+    public static final int SIZE = 50;
     public static final int SIGHT = 5;
     public static final int TIME = 10;
     public static final int DEFAULTPERCENTAGEOFOBSTACLES = 30;
