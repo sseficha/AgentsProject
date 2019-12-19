@@ -16,14 +16,21 @@ class Stats {
 
         private int numberOfAgents;
         private String algorithm;
+        private int sight;
         private Point sizeOfMap;
         private double time;
 
-        Stat (int numberOfAgents, String algorithm, Point sizeOfMap, double time) {
+        Stat (int numberOfAgents, String algorithm, int sight, Point sizeOfMap, double time) {
             this.numberOfAgents = numberOfAgents;
             this.algorithm = algorithm;
+            this.sight = sight;
             this.sizeOfMap = sizeOfMap;
             this.time = time;
+        }
+
+
+        public String toFile () {
+            return numberOfAgents + ";" + algorithm + ";" + sight + ";" + sizeOfMap.x + ";" + sizeOfMap.y + ";" + time + System.lineSeparator();
         }
 
 
@@ -31,14 +38,15 @@ class Stats {
 
             return numberOfAgents == x.numberOfAgents
                    && algorithm.equals(x.algorithm)
-                   && sizeOfMap == x.sizeOfMap;
+                   && sight == x.sight
+                   && sizeOfMap.equals(x.sizeOfMap);
         }
 
 
         @Override
         public String toString () {
 
-            return numberOfAgents + ";" + algorithm + ";" + sizeOfMap.x + ";" + sizeOfMap.y + ";" + time;
+            return "Agents: " + numberOfAgents + ", Algorithm: " + algorithm + ", Sight: " + sight + ", Size: " + sizeOfMap.x + "*" + sizeOfMap.y + ", Time: " + time + System.lineSeparator();
         }
 
     }
@@ -63,11 +71,12 @@ class Stats {
 
                 int numberOfAgents = Integer.parseInt(data[0]);
                 String algorithm = data[1];
-                int sizeOfMapX = Integer.parseInt(data[2]);
-                int sizeOfMapY = Integer.parseInt(data[3]);
-                double time = Double.parseDouble(data[4]);
+                int sight = Integer.parseInt(data[2]);
+                int sizeOfMapX = Integer.parseInt(data[3]);
+                int sizeOfMapY = Integer.parseInt(data[4]);
+                double time = Double.parseDouble(data[5]);
 
-                stats.add(new Stat(numberOfAgents, algorithm, new Point(sizeOfMapX, sizeOfMapY), time));
+                stats.add(new Stat(numberOfAgents, algorithm, sight, new Point(sizeOfMapX, sizeOfMapY), time));
             }
 
         } catch (IOException ignored) {
@@ -81,15 +90,15 @@ class Stats {
      * It puts a new stat at the ArrayList.
      *
      * @param numberOfAgents The number of agents used
+     * @param sight          The vision range of the agents
      * @param sizeOfMap      The size of the map used
      * @param nanoTime       The current time after the solution has found
      */
-    public void putStat (int numberOfAgents, String algorithm, Point sizeOfMap, long nanoTime, int ticker) {
+    public void putStat (int numberOfAgents, String algorithm, int sight, Point sizeOfMap, long nanoTime, int ticker) {
 
         double timeElapsed = ((nanoTime - startTime) / (ticker * Math.pow(10, 9)));
 
-        stats.add(new Stat(numberOfAgents, algorithm, sizeOfMap, timeElapsed));
-
+        stats.add(new Stat(numberOfAgents, algorithm, sight, sizeOfMap, timeElapsed));
     }
 
 
@@ -101,7 +110,7 @@ class Stats {
         try (BufferedWriter out = new BufferedWriter(new FileWriter(filename))) {
             stats.forEach((i) -> {
                 try {
-                    out.write(i.toString() + System.lineSeparator());
+                    out.write(i.toFile());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -126,15 +135,24 @@ class Stats {
         ArrayList<Stat> metrics = new ArrayList<>();
         ArrayList<Integer> metricsCount = new ArrayList<>();
 
-        stats.forEach(statInBase -> metrics.forEach(statToMetrics -> {
-            if (statInBase.equals(statToMetrics)) {
-                statToMetrics.time += statInBase.time;
-                metricsCount.set(metrics.indexOf(statToMetrics), metricsCount.get(metrics.indexOf(statToMetrics) + 1));
-            } else {
-                metrics.add(statInBase);
-                metricsCount.set(metrics.indexOf(statToMetrics), 1);
+        for (Stat stat : stats) {
+
+            int index = -1;
+            for (int i = 0; i < metrics.size(); i++) {
+                if (stat.equals(metrics.get(i))) {
+                    index = i;
+                    break;
+                }
             }
-        }));
+
+            if (index >= 0) {
+                metrics.get(index).time += stat.time;
+                metricsCount.set(index, metricsCount.get(index) + 1);
+            } else {
+                metrics.add(stat);
+                metricsCount.add(1);
+            }
+        }
 
         for (int i = 0; i < metrics.size(); i++) {
             metrics.get(i).time /= metricsCount.get(i);
