@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 class Stats {
 
-    private ArrayList<Stat> stats;
+    protected ArrayList<Stat> stats;
     private String filename;
     private double startTime;
 
@@ -160,5 +160,10 @@ class Stats {
 
         return metrics;
     }
+
+    Stat getLast() {
+        return stats.get(stats.size()-1);
+    }
+
 
 }

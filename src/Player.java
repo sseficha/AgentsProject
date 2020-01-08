@@ -572,7 +572,7 @@ public class Player extends Agent {
         if (Objects.equals(map[position.x][position.y].getContent(), 'X')) {
 
             // Inform gameLauncher
-            //==================????
+            //==================
             ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
             msg.addReceiver(masterId);
             String message = "FOUND TREASURE ! The " + team + " won!";
@@ -583,11 +583,12 @@ public class Player extends Agent {
             if (team.equals("team1"))
                 algorithm = "A*";
             gameLauncher.stats.putStat(teammates.size(), algorithm, sight, new Point(map[0].length, map.length), System.nanoTime(), gameLauncher.TIME);
+            String jOptionMessage = message + System.lineSeparator() + System.lineSeparator() + gameLauncher.stats.getLast().toString();
 
             // Kills all agents and shows message
             gameLauncher.killAgents();
-            JOptionPane.showMessageDialog(null, message, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
-            //==================????
+            JOptionPane.showMessageDialog(null, jOptionMessage, "WINNER!", JOptionPane.INFORMATION_MESSAGE);
+            //==================
         }
     }
 

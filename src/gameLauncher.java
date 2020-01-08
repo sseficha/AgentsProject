@@ -20,7 +20,7 @@ public class gameLauncher extends Agent {
 
     public static final int SIZE = 50;
     public static final int SIGHT = 5;
-    public static final int TIME = 10;
+    public static final int TIME = 100;
     public static final int DEFAULTPERCENTAGEOFOBSTACLES = 30;
 
     public static MyMap map;
@@ -31,8 +31,8 @@ public class gameLauncher extends Agent {
     public AgentContainer mainContainer = runtime.createMainContainer(config);
     public int numTeam1;
     public int numTeam2;
-    public static AgentController[] ctrl1; //prosorina static
-    public static AgentController[] ctrl2; //prosorina static
+    public static AgentController[] ctrl1;
+    public static AgentController[] ctrl2;
     public static Stats stats;
 
 
@@ -163,7 +163,6 @@ public class gameLauncher extends Agent {
     }
 
 
-    //prosorina static
     public static void killAgents () {
 
         stats.save();
